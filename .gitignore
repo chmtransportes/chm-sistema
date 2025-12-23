@@ -1,0 +1,106 @@
+# CHM-SISTEMA - Git Ignore
+# Autor: ch-mestriner (https://ch-mestriner.com.br)
+# Data: 2025-11-26
+
+# Dependências
+/vendor/
+/node_modules/
+composer.lock
+package-lock.json
+
+# Logs
+/logs/
+*.log
+*.tmp
+
+# Arquivos de ambiente
+.env
+.env.local
+.env.production
+.env.development
+
+# Arquivos de configuração sensíveis
+config.local.php
+db.local.php
+
+# Backups
+*.bak
+*.old
+*.backup
+*.sql.gz
+*.sql.zip
+backup/
+backups/
+
+# Uploads e dados temporários
+/uploads/
+/temp/
+/tmp/
+*.cache
+
+# Banco de dados SQLite
+*.db
+*.sqlite
+*.sqlite3
+/data/
+
+# IDEs e Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+*.sublime-project
+*.sublime-workspace
+
+# Sistema Operacional
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# PHP
+*.php~
+.phpunit.result.cache
+phpunit.xml
+
+# Composer
+composer.phar
+
+# NPM
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Arquivos compilados
+*.min.js
+*.min.css
+/dist/
+/build/
+
+# Certificados e chaves
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+
+# Arquivos de sessão
+/sessions/
+sess_*
+
+# Cache
+/cache/
+*.cache
+
+# Outros
+.htpasswd
+error_log
+access_log
