@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <rect width="192" height="192" rx="32" fill="#1a1a2e"/>
+  <g fill="#e94560">
+    <path d="M96 40c-25 0-48 12-62 32h124c-14-20-37-32-62-32z"/>
+    <rect x="30" y="80" width="132" height="60" rx="8"/>
+    <circle cx="55" cy="150" r="18"/>
+    <circle cx="137" cy="150" r="18"/>
+  </g>
+  <rect x="45" y="95" width="35" height="25" rx="4" fill="#fff" opacity="0.3"/>
+  <rect x="112" y="95" width="35" height="25" rx="4" fill="#fff" opacity="0.3"/>
+  <text x="96" y="115" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="14" font-weight="bold">CHM</text>
+</svg>

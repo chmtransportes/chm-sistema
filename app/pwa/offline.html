@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1a1a2e">
+    <title>Offline | CHM Sistema</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        .container { max-width: 400px; }
+        .icon { font-size: 80px; margin-bottom: 20px; opacity: 0.5; }
+        h1 { font-size: 28px; margin-bottom: 15px; }
+        p { opacity: 0.7; margin-bottom: 30px; line-height: 1.6; }
+        button {
+            padding: 12px 30px;
+            background: #e94560;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover { background: #d63853; transform: translateY(-2px); }
+        .status {
+            margin-top: 30px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        .status.online { background: rgba(40, 167, 69, 0.3); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">📡</div>
+        <h1>Você está offline</h1>
+        <p>Não foi possível conectar ao servidor. Verifique sua conexão com a internet e tente novamente.</p>
+        <button onclick="location.reload()">Tentar Novamente</button>
+        <div class="status" id="status">Verificando conexão...</div>
+    </div>
+
+    <script>
+        function updateStatus() {
+            const status = document.getElementById('status');
+            if (navigator.onLine) {
+                status.textContent = '✓ Conexão restaurada!';
+                status.classList.add('online');
+                setTimeout(() => location.reload(), 1000);
+            } else {
+                status.textContent = '✕ Sem conexão';
+                status.classList.remove('online');
+            }
+        }
+
+        updateStatus();
+        window.addEventListener('online', updateStatus);
+        window.addEventListener('offline', updateStatus);
+        setInterval(updateStatus, 5000);
+    </script>
+</body>
+</html>

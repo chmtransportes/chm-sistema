@@ -104,3 +104,4 @@ sess_*
 .htpasswd
 error_log
 access_log
+backup/
