@@ -36,16 +36,16 @@ jobs:
           find . -name "*.php" -print0 | xargs -0 -n1 php -l
 
   restore-database:
-    name: 3. Restore Banco de Dados (DESATIVADO)
-    runs-on: ubuntu-latest
-    needs: validate-code
-    steps:
-      - name: Restore desativado
-        run: |
-          echo "======================================"
-          echo "RESTORE DO BANCO DESATIVADO"
-          echo "Deploy seguirá SOMENTE com código"
-          echo "======================================"
+  name: 3. Restore Banco de Dados (DESATIVADO)
+  runs-on: ubuntu-latest
+  needs: validate-code
+  steps:
+    - name: Restore desativado temporariamente
+      run: |
+        echo "===================================="
+        echo "RESTORE DO BANCO DESATIVADO"
+        echo "Deploy seguirá SOMENTE com código"
+        echo "===================================="
 
   deploy-ftp:
     name: 4. Deploy FTP
