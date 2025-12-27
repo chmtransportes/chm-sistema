@@ -69,9 +69,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Busca CEP
+    // Busca CEP automática ao digitar 8 dígitos
     document.querySelectorAll('[data-cep-search]').forEach(input => {
-        input.addEventListener('blur', async function(e) {
+        input.addEventListener('input', async function(e) {
             const cep = e.target.value.replace(/\D/g, '');
             if (cep.length !== 8) return;
 
@@ -81,10 +81,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (!data.erro) {
                     const form = e.target.closest('form');
-                    if (form.querySelector('[name="address"]')) form.querySelector('[name="address"]').value = data.logradouro;
-                    if (form.querySelector('[name="neighborhood"]')) form.querySelector('[name="neighborhood"]').value = data.bairro;
-                    if (form.querySelector('[name="city"]')) form.querySelector('[name="city"]').value = data.localidade;
-                    if (form.querySelector('[name="state"]')) form.querySelector('[name="state"]').value = data.uf;
+                    if (form.querySelector('[name="address"]')) form.querySelector('[name="address"]').value = data.logradouro || '';
+                    if (form.querySelector('[name="neighborhood"]')) form.querySelector('[name="neighborhood"]').value = data.bairro || '';
+                    if (form.querySelector('[name="city"]')) form.querySelector('[name="city"]').value = data.localidade || '';
+                    if (form.querySelector('[name="state"]')) form.querySelector('[name="state"]').value = data.uf || '';
                 }
             } catch (error) {
                 console.error('Erro ao buscar CEP:', error);

@@ -2,7 +2,7 @@
 /**
  * CHM Sistema - Formulário de Motorista
  * @author ch-mestriner (https://ch-mestriner.com.br)
- * @date 23/12/2025
+ * @date 25/12/2025
  */
 
 use CHM\Core\Session;
@@ -126,17 +126,21 @@ $csrfToken = Session::getCsrfToken();
                                 <label class="form-label">Nº</label>
                                 <input type="text" name="address_number" class="form-control" value="<?= htmlspecialchars($driver['address_number'] ?? '') ?>">
                             </div>
-                            <div class="col-md-2">
-                                <label class="form-label">Bairro</label>
-                                <input type="text" name="neighborhood" class="form-control" value="<?= htmlspecialchars($driver['neighborhood'] ?? '') ?>">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Cidade</label>
-                                <input type="text" name="city" class="form-control" value="<?= htmlspecialchars($driver['city'] ?? '') ?>">
-                            </div>
-                            <div class="col-md-1">
-                                <label class="form-label">UF</label>
-                                <input type="text" name="state" class="form-control" maxlength="2" value="<?= htmlspecialchars($driver['state'] ?? '') ?>">
+                            <div class="col-12">
+                                <div class="address-row">
+                                    <div class="field-bairro">
+                                        <label class="form-label">Bairro</label>
+                                        <input type="text" name="neighborhood" class="form-control" value="<?= htmlspecialchars($driver['neighborhood'] ?? '') ?>">
+                                    </div>
+                                    <div class="field-cidade">
+                                        <label class="form-label">Cidade</label>
+                                        <input type="text" name="city" class="form-control" value="<?= htmlspecialchars($driver['city'] ?? '') ?>">
+                                    </div>
+                                    <div class="field-uf">
+                                        <label class="form-label">UF</label>
+                                        <input type="text" name="state" class="form-control" maxlength="2" value="<?= htmlspecialchars($driver['state'] ?? '') ?>">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -232,6 +236,28 @@ $csrfToken = Session::getCsrfToken();
 </div>
 
 <style>
+.address-row {
+    display: flex !important;
+    width: 100% !important;
+    gap: 12px !important;
+    align-items: flex-start !important;
+    flex-wrap: nowrap !important;
+}
+.address-row .field-bairro {
+    flex: 0 0 25% !important;
+    min-width: 120px;
+}
+.address-row .field-cidade {
+    flex: 1 1 auto !important;
+}
+.address-row .field-uf {
+    flex: 0 0 70px !important;
+    max-width: 70px !important;
+    min-width: 70px !important;
+}
+.address-row input {
+    height: 42px;
+}
 .preview-container {
     position: relative;
     display: inline-block;

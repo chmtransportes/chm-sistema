@@ -1,4 +1,7 @@
 <?php
+echo 'CHEGOU NO INDEX DA RAIZ';
+exit;
+
 /**
  * CHM Sistema - Entry Point Produção
  * @author ch-mestriner

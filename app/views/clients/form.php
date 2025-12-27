@@ -2,7 +2,7 @@
 /**
  * CHM Sistema - Formulário de Cliente
  * @author ch-mestriner (https://ch-mestriner.com.br)
- * @date 23/12/2025
+ * @date 25/12/2025
  */
 
 use CHM\Core\Session;
@@ -120,26 +120,16 @@ $csrfToken = Session::getCsrfToken();
                         <input type="text" name="address_number" class="form-control" value="<?= htmlspecialchars($client['address_number'] ?? '') ?>">
                     </div>
 
-                    <!-- Complemento -->
-                    <div class="col-md-3">
-                        <label class="form-label">Complemento</label>
-                        <input type="text" name="address_complement" class="form-control" value="<?= htmlspecialchars($client['address_complement'] ?? '') ?>">
-                    </div>
-
-                    <!-- Bairro -->
+                    <!-- Bairro, Cidade, UF -->
                     <div class="col-md-3">
                         <label class="form-label">Bairro</label>
                         <input type="text" name="neighborhood" class="form-control" value="<?= htmlspecialchars($client['neighborhood'] ?? '') ?>">
                     </div>
-
-                    <!-- Cidade -->
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                         <label class="form-label">Cidade</label>
                         <input type="text" name="city" class="form-control" value="<?= htmlspecialchars($client['city'] ?? '') ?>">
                     </div>
-
-                    <!-- Estado -->
-                    <div class="col-md-2">
+                    <div class="col-md-1">
                         <label class="form-label">UF</label>
                         <input type="text" name="state" class="form-control" maxlength="2" value="<?= htmlspecialchars($client['state'] ?? '') ?>">
                     </div>

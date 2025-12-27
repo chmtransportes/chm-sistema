@@ -177,7 +177,7 @@ class Helpers
     }
 
     // Retorna perfil formatado
-    public static function profileLabel(?int $profile): string
+    public static function profileLabel(mixed $profile = null): string
     {
         if ($profile === null) {
             return '<span class="badge bg-secondary">Visitante</span>';

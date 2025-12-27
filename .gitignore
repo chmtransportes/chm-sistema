@@ -105,3 +105,5 @@ sess_*
 error_log
 access_log
 backup/
+
+sync_config.jsonc
