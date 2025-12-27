@@ -1,37 +1,78 @@
 # CHM Sistema - Fluxo CI/CD Windsurf (Produção)
 
-## Visão geral
-1. O GitHub é a única fonte da verdade. Qualquer push em `main` ou `production` dispara de imediato o workflow no Windsurf.
-2. O Windsurf executa um restore completo do banco, limpa cache, aplica o código e realiza validações automáticas antes de liberar o site em produção.
-3. Não há FTP, cPanel ou ações manuais no servidor; tudo acontece dentro do CI/CD.
+**Versão:** 2.3.4  
+**@author:** ch-mestriner (https://ch-mestriner.com.br)  
+**@date:** 27/12/2025 14:30
 
-## Sequência automatizada
-1. **Restore do banco**
-   - O pipeline descompacta `backup-db-27-12-2025_02-00-01.sql.gz` e faz `mysql` usando as credenciais do Windurf, garantindo o estado do banco de 27/12 entre 00:01 e 02:00.
-2. **Limpeza de cache**
-   - Executa `php -r "define('CHM_SISTEMA', true); require 'app/config/config.php'; require 'app/core/Helpers.php'; CHM\\Core\\Helpers::clearCache();"` para remover caches de aplicação e garantir que as views recompiladas usem os dados restaurados.
-3. **Deploy do código**
-   - O entry point `index.php` permanece leve e apenas inclui `app/index.php`.
-   - `app/index.php` inicializa sessão, autoload, configurações, middlewares e todas as rotas, disparando `Router::dispatch()` sem `declare(strict_types)` nem `php_flag`, compatível com hospedagem compartilhada.
-4. **Validação pós-deploy**
-   - Scripts verificam:
-     * Bootstrap (index → app)
-     * Inicialização do Router
-     * `/login` e `/dashboard`
-     * `/calendar` e `/api/calendar/events`
-     * Logs (`logs/php-errors.log`) sem `Fatal error`
+## Visão Geral
 
-## Pré-requisitos no repositório
-- `app/index.php` restaurado para o front controller principal (sem stub). 
-- `.htaccess` replicando o conteúdo seguro do `.htaccess.bak` (rewrite `/`, bloqueios e charset UTF-8) versionado no repo.
-- Scripts e diretórios de logs/upload/backup criados automaticamente no front controller.
-- Workflow YAML `CHM Sistema – Pós Deploy Validation` presente no GitHub Actions/Windsurf.
+O GitHub é a **única fonte da verdade**. Um push em `main` dispara automaticamente:
+1. Validação de código PHP
+2. Deploy via FTP para produção
+3. Limpeza de cache
+4. Checklist pós-deploy
 
-## Responsabilidades do Windsurf/CI
-- Executar o restore do backup 27/12 antes de qualquer outra etapa.
-- Limpar cache com a chamada ao helper após o restore.
-- Validar o sistema como descrito acima e falhar o build caso alguma etapa indique erro.
-- Garantir que o deploy finalize somente se todas as validações passarem.
+**PROIBIDO:** FTP manual, cPanel, alterações diretas no servidor.
 
-## Resultado esperado
-Um push ativo no GitHub produz o seguinte ciclo: restore → limpeza de cache → deploy → checklist → site online sem HTTP 500. Esse fluxo evita intervenções manuais e mantém a hospedagem Apache/PHP saudável.
+## Secrets Necessários (GitHub)
+
+Configure em: `Settings → Secrets and variables → Actions`
+
+| Secret | Descrição |
+|--------|-----------|
+| `FTP_HOST` | Host FTP (ex: 186.209.113.108) |
+| `FTP_USER` | Usuário FTP (ex: chm-sistema@chm-sistema.com.br) |
+| `FTP_PASS` | Senha FTP |
+| `DB_HOST` | Host MySQL (ex: 186.209.113.108) |
+| `DB_NAME` | Nome do banco (ex: chmtrans_chm-sistema) |
+| `DB_USER` | Usuário MySQL |
+| `DB_PASS` | Senha MySQL |
+| `DEPLOY_SECRET` | Token para endpoints de deploy (ex: chm-deploy-2025) |
+
+## Workflow Automático
+
+```
+GitHub Push → Validate → Deploy FTP → Clear Cache → Post-Deploy Check
+```
+
+### Jobs do Pipeline
+
+1. **validate** - Valida sintaxe PHP e arquivos críticos
+2. **deploy** - Upload via FTP/SFTP para produção
+3. **restore-database** - (Manual) Restaura backup do banco
+4. **post-deploy-validation** - Testes automáticos pós-deploy
+
+## Endpoints de Deploy
+
+| Endpoint | Função |
+|----------|--------|
+| `/api/health` | Health check (sem auth) |
+| `/api/deploy/clear-cache?secret=X` | Limpa OPcache e cache de arquivos |
+| `/api/deploy/restore-db?secret=X&date=YYYY-MM-DD` | Restaura backup do banco |
+
+## Correções v2.3.4 (HTTP 500)
+
+**Causa raiz:** `app/index.php` usava constantes (`APP_PATH`, `LOGS_PATH`) ANTES de carregar `config.php`.
+
+**Correções aplicadas:**
+- `index.php` raiz: entry point mínimo sem `declare(strict_types)`
+- `app/index.php`: carrega `config.php` PRIMEIRO
+- `.htaccess`: sem `php_value`/`php_flag` (compatível com shared hosting)
+- Error handlers robustos via código PHP
+
+## Checklist Pós-Deploy
+
+O workflow valida automaticamente:
+- ✓ Bootstrap (index.php → app/index.php)
+- ✓ Rota `/login` retorna 200
+- ✓ Conexão com banco de dados
+- ✓ Ausência de HTTP 500 em páginas críticas
+
+## Resultado Esperado
+
+Um push no GitHub executa:
+```
+validate → deploy → clear-cache → post-deploy-check → ✓ PRODUÇÃO ONLINE
+```
+
+Sem intervenção manual. Sem FTP. Sem cPanel.
