@@ -2,6 +2,11 @@ name: Deploy Produção
 
 on:
   workflow_dispatch:
+    inputs:
+      restore_db:
+        description: 'Executar restore do banco de dados?'
+        required: false
+        default: 'false'
 
 jobs:
 
