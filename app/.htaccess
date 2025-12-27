@@ -1,40 +1,57 @@
-# CHM-SISTEMA - .htaccess Produção
+# CHM-SISTEMA - .htaccess App (Produção)
 # @author ch-mestriner (https://ch-mestriner.com.br)
-# @date 24/12/2025
+# @date 27/12/2025 14:30
+# @version 2.3.4
+#
+# Compatível com hospedagem compartilhada
+# NÃO usar php_value/php_flag aqui
 
 Options -Indexes
-Options +FollowSymLinks
 
 <IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
-
-  # Servir apenas arquivos estáticos diretamente
-  RewriteCond %{REQUEST_FILENAME} -f
-  RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|webp|json|webmanifest)$ [NC]
-  RewriteRule ^ - [L]
-
-  # Todas as outras requisições vão para index.php
-  RewriteRule ^(.*)$ index.php [QSA,L]
+    RewriteEngine On
+    RewriteBase /
+    
+    # Arquivos estáticos servidos diretamente
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|webp|json|webmanifest)$ [NC]
+    RewriteRule ^ - [L]
+    
+    # Todas as outras requisições vão para index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php [QSA,L]
 </IfModule>
 
-# Proteção de arquivos sensíveis
-<FilesMatch "\.(sql|bak|old|log|ini|env|git|gitignore)$">
-  Order Allow,Deny
-  Deny from all
+# Protege arquivos sensíveis
+<FilesMatch "\.(sql|bak|old|log|ini|env|sh|php~)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Allow,Deny
+        Deny from all
+    </IfModule>
 </FilesMatch>
+
+# Protege diretórios de config
+<IfModule mod_rewrite.c>
+    RewriteRule ^config/ - [F,L]
+    RewriteRule ^core/ - [F,L]
+    RewriteRule ^database/ - [F,L]
+</IfModule>
 
 # Charset UTF-8
 AddDefaultCharset UTF-8
 
 # Compressão GZIP
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
 </IfModule>
 
 # Headers de Segurança
 <IfModule mod_headers.c>
-  Header always set X-Frame-Options "SAMEORIGIN"
-  Header always set X-Content-Type-Options "nosniff"
-  Header always set X-XSS-Protection "1; mode=block"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-XSS-Protection "1; mode=block"
 </IfModule>

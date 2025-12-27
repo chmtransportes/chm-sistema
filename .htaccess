@@ -1,24 +1,52 @@
-# CHM-SISTEMA - .htaccess COMPATÍVEL (shared hosting)
+# CHM-SISTEMA - .htaccess Raiz (Produção)
+# @author ch-mestriner (https://ch-mestriner.com.br)
+# @date 27/12/2025 14:30
+# @version 2.3.4
+#
+# Compatível com hospedagem compartilhada
+# NÃO usar php_value/php_flag aqui
 
+# Desabilita listagem de diretórios
 Options -Indexes
-Options +FollowSymLinks
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /
+    
+    # Redireciona tudo para o app (exceto arquivos estáticos existentes)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php [QSA,L]
 </IfModule>
 
-# Bloquear arquivos sensíveis
-<FilesMatch "\.(env|ini|log|sql|bak|old)$">
-    Require all denied
+# Protege arquivos sensíveis
+<FilesMatch "\.(sql|bak|old|log|ini|env|sh|git|gitignore|md)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Allow,Deny
+        Deny from all
+    </IfModule>
 </FilesMatch>
 
-# Bloquear pastas sensíveis
+# Protege diretórios sensíveis
 <IfModule mod_rewrite.c>
-    RewriteRule ^logs/ - [F,L]
-    RewriteRule ^backup/ - [F,L]
-    RewriteRule ^backups/ - [F,L]
-    RewriteRule ^\.git/ - [F,L]
+    RewriteRule ^(backup|backups|logs|scripts|docs|\.git)/ - [F,L]
 </IfModule>
 
+# Charset UTF-8
 AddDefaultCharset UTF-8
+
+# Compressão GZIP (se disponível)
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Headers de segurança (se mod_headers disponível)
+<IfModule mod_headers.c>
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

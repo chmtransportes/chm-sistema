@@ -1,0 +1,10 @@
+# Protege endpoints de deploy
+# Apenas acesso com secret válido é permitido
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Bloqueia acesso sem query string
+    RewriteCond %{QUERY_STRING} !secret=
+    RewriteRule ^.*$ - [F,L]
+</IfModule>

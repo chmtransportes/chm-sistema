@@ -17,7 +17,7 @@ require_once __DIR__ . '/env_loader.php';
 EnvLoader::load();
 
 // Versão do sistema
-define('CHM_VERSION', '2.3.3');
+define('CHM_VERSION', '2.3.4');
 define('CHM_VERSION_DATE', '2025-12-27');
 
 // Ambiente (production ou development)
