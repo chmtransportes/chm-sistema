@@ -1,5 +1,5 @@
 <?php
-echo 'CHEGOU NO INDEX DA RAIZ';
+require_once __DIR__ . '/app/index.php';
 exit;
 
 /**
