@@ -12,16 +12,34 @@ if (!defined('CHM_SISTEMA')) {
     exit('Acesso negado.');
 }
 
-// Carregar ambiente de produção se existir
-require_once __DIR__ . '/env_loader.php';
-EnvLoader::load();
+// Carregar ambiente de produção se existir (com fallback seguro)
+$envLoaderPath = __DIR__ . '/env_loader.php';
+if (file_exists($envLoaderPath)) {
+    require_once $envLoaderPath;
+    EnvLoader::load();
+} else {
+    // Fallback: classe EnvLoader mínima para não quebrar produção
+    class EnvLoader {
+        private static $env = [];
+        public static function load() {}
+        public static function get($key, $default = null) {
+            return $_ENV[$key] ?? getenv($key) ?: $default;
+        }
+        public static function isProduction() {
+            return self::get('APP_ENV') === 'production';
+        }
+        public static function isDevelopment() {
+            return !self::isProduction();
+        }
+    }
+}
 
 // Versão do sistema
-define('CHM_VERSION', '2.3.5');
+define('CHM_VERSION', '2.3.6');
 define('CHM_VERSION_DATE', '2025-12-27');
 
 // Ambiente (production ou development)
-define('CHM_ENVIRONMENT', EnvLoader::get('APP_ENV', 'development'));
+define('CHM_ENVIRONMENT', EnvLoader::get('APP_ENV', 'production'));
 
 // Timezone
 date_default_timezone_set('America/Sao_Paulo');
