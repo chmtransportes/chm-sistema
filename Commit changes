@@ -1,0 +1,21 @@
+<?php
+/**
+ * CHM Sistema
+ * Script de backup automático do banco de dados
+ * Executado via cron ou CI/CD
+ */
+
+declare(strict_types=1);
+
+// Evita execução direta indevida
+if (php_sapi_name() !== 'cli') {
+    exit("Acesso não permitido\n");
+}
+
+echo "Iniciando script de backup...\n";
+
+// Aqui futuramente entra a lógica real de backup
+// Por enquanto, apenas valida o arquivo sem erro de sintaxe
+
+echo "Script cron-backup.php carregado com sucesso.\n";
+exit(0);
