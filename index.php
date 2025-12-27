@@ -1,19 +1,19 @@
 <?php
-// chm-sistema - bootstrap inicial
-date_default_timezone_set('America/Sao_Paulo');
-header('Content-Type: text/html; charset=utf-8');
-?>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>CHM Sistema</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#000000">
-</head>
-<body style="font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:40px;">
-  <h1>CHM Sistema</h1>
-  <p>Sistema inicial carregado com sucesso.</p>
-  <p>Status: <strong>OK</strong></p>
-</body>
-</html>
+/**
+ * CHM Sistema - Entry Point Produção
+ * @author ch-mestriner
+ * @date 27/12/2025
+ */
+
+declare(strict_types=1);
+
+// Evita dupla definição
+if (!defined('BASE_PATH')) {
+    define('BASE_PATH', __DIR__ . '/');
+}
+
+// Carrega config principal UMA VEZ
+require_once BASE_PATH . 'config/config.php';
+
+// Redireciona para o app real
+require_once BASE_PATH . 'app/index.php';
