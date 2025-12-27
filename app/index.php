@@ -1,38 +1,20 @@
 <?php
 /**
- * CHM Sistema - Front Controller
- * Produção
+ * TESTE CONTROLADO - app/index.php
+ * NÃO é definitivo
+ * Serve apenas para diagnóstico
  */
 
-declare(strict_types=1);
+http_response_code(200);
 
-// Timezone
-date_default_timezone_set('America/Sao_Paulo');
+echo '<h1>TESTE OK</h1>';
+echo '<p>Arquivo: app/index.php</p>';
+echo '<p>PHP está executando corretamente.</p>';
+echo '<hr>';
 
-// Caminho raiz do projeto
-define('BASE_PATH', __DIR__ . '/');
+echo '<pre>';
+echo 'DIR: ' . __DIR__ . PHP_EOL;
+echo 'PHP VERSION: ' . phpversion() . PHP_EOL;
+echo '</pre>';
 
-// Autoload simples
-spl_autoload_register(function ($class) {
-    $prefix = 'CHM\\';
-    $baseDir = BASE_PATH . 'core/';
-
-    if (strncmp($prefix, $class, strlen($prefix)) !== 0) {
-        return;
-    }
-
-    $relativeClass = substr($class, strlen($prefix));
-    $file = $baseDir . str_replace('\\', '/', $relativeClass) . '.php';
-
-    if (file_exists($file)) {
-        require_once $file;
-    }
-});
-
-// Carrega configuração (UMA VEZ)
-require_once BASE_PATH . 'config/config.php';
-
-// Dispara o router
-use CHM\Core\Router;
-
-Router::getInstance()->dispatch();
+exit;
