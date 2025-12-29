@@ -353,7 +353,31 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    cursor: default;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.agenda-add:hover {
+    border-color: var(--gc-primary);
+    color: var(--gc-primary);
+    background: rgba(26, 115, 232, 0.05);
+}
+
+/* Feriados */
+.event-holiday {
+    font-style: italic;
+}
+
+.fc-day-holiday {
+    background-color: #e8f5e9 !important;
+}
+
+.holiday-indicator {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 10px;
+    color: #4caf50;
 }
 
 /* Área Principal do Calendário */
@@ -693,7 +717,7 @@
                 <span class="legend-dot cancelled"></span>
                 <span class="agenda-name">Cancelado</span>
             </label>
-            <button class="agenda-add" type="button" aria-disabled="true">
+            <button class="agenda-add" type="button" id="btnAddAgenda" data-bs-toggle="modal" data-bs-target="#createEventModal">
                 <i class="bi bi-plus-lg"></i>
                 Adicionar agenda
             </button>
@@ -761,11 +785,157 @@
             </div>
             <div class="modal-body" id="eventDetails"></div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger me-auto" id="btnDeleteEvent" style="display:none">
+                    <i class="bi bi-trash me-1"></i>Excluir
+                </button>
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fechar</button>
                 <a href="#" id="eventEditBtn" class="btn btn-primary">
                     <i class="bi bi-pencil me-1"></i>Editar
                 </a>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Criar Evento -->
+<div class="modal fade modal-google" id="createEventModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-calendar-plus me-2 text-primary"></i>
+                    Novo Evento na Agenda
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="createEventForm">
+                <input type="hidden" name="csrf_token" value="<?= $csrfToken ?? '' ?>">
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <!-- Título -->
+                        <div class="col-12">
+                            <label class="form-label">Título do Evento <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="title" id="eventTitleInput" required 
+                                   placeholder="Ex: Reunião com cliente, Transfer VCP-GRU...">
+                        </div>
+                        
+                        <!-- Data e Hora -->
+                        <div class="col-md-6">
+                            <label class="form-label">Data de Início <span class="text-danger">*</span></label>
+                            <input type="date" class="form-control" name="start_date" id="eventStartDate" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Hora de Início <span class="text-danger">*</span></label>
+                            <input type="time" class="form-control" name="start_time" id="eventStartTime" required>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label class="form-label">Data de Término</label>
+                            <input type="date" class="form-control" name="end_date" id="eventEndDate">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Hora de Término</label>
+                            <input type="time" class="form-control" name="end_time" id="eventEndTime">
+                        </div>
+                        
+                        <!-- Dia inteiro -->
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" name="all_day" id="eventAllDay">
+                                <label class="form-check-label" for="eventAllDay">Dia inteiro</label>
+                            </div>
+                        </div>
+                        
+                        <!-- Local -->
+                        <div class="col-12">
+                            <label class="form-label">Local</label>
+                            <input type="text" class="form-control" name="location" id="eventLocation" 
+                                   placeholder="Ex: Aeroporto de Guarulhos, Escritório...">
+                        </div>
+                        
+                        <!-- Descrição -->
+                        <div class="col-12">
+                            <label class="form-label">Descrição</label>
+                            <textarea class="form-control" name="description" id="eventDescription" rows="2" 
+                                      placeholder="Observações adicionais..."></textarea>
+                        </div>
+                        
+                        <!-- Cor -->
+                        <div class="col-md-6">
+                            <label class="form-label">Cor do Evento</label>
+                            <select class="form-select" name="color" id="eventColor">
+                                <option value="#1a73e8">🔵 Azul (Padrão)</option>
+                                <option value="#33b679">🟢 Verde</option>
+                                <option value="#f9ab00">🟡 Amarelo</option>
+                                <option value="#d93025">🔴 Vermelho</option>
+                                <option value="#7986cb">🟣 Roxo</option>
+                                <option value="#039be5">🔷 Ciano</option>
+                                <option value="#616161">⚫ Cinza</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Tipo -->
+                        <div class="col-md-6">
+                            <label class="form-label">Tipo de Evento</label>
+                            <select class="form-select" name="event_type" id="eventType">
+                                <option value="personal">Pessoal</option>
+                                <option value="meeting">Reunião</option>
+                                <option value="reminder">Lembrete</option>
+                                <option value="task">Tarefa</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Associações -->
+                        <div class="col-md-6">
+                            <label class="form-label">Cliente (opcional)</label>
+                            <select class="form-select" name="client_id" id="eventClientId">
+                                <option value="">Nenhum</option>
+                                <?php if (!empty($clients)): ?>
+                                    <?php foreach ($clients as $c): ?>
+                                        <option value="<?= $c['id'] ?>"><?= htmlspecialchars($c['name']) ?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Motorista (opcional)</label>
+                            <select class="form-select" name="driver_id" id="eventDriverId">
+                                <option value="">Nenhum</option>
+                                <?php if (!empty($drivers)): ?>
+                                    <?php foreach ($drivers as $d): ?>
+                                        <option value="<?= $d['id'] ?>"><?= htmlspecialchars($d['name']) ?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                        
+                        <!-- Notificações -->
+                        <div class="col-12">
+                            <label class="form-label">Notificações por E-mail</label>
+                            <div class="d-flex flex-wrap gap-3">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="notify_email" id="notifyEmail">
+                                    <label class="form-check-label" for="notifyEmail">Enviar e-mail</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="notify_client" id="notifyClient">
+                                    <label class="form-check-label" for="notifyClient">Notificar cliente</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="notify_driver" id="notifyDriver">
+                                    <label class="form-check-label" for="notifyDriver">Notificar motorista</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="btnSaveEvent">
+                        <i class="bi bi-check-lg me-1"></i>Salvar Evento
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -1105,5 +1275,145 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('fabCreate').style.display = 'none';
         }
     });
+    
+    // ========================================
+    // CRIAR EVENTO - Formulário
+    // ========================================
+    const createEventModal = document.getElementById('createEventModal');
+    const createEventForm = document.getElementById('createEventForm');
+    
+    // Preenche data/hora atual ao abrir modal
+    createEventModal.addEventListener('show.bs.modal', function() {
+        const now = new Date();
+        const dateStr = formatDateLocal(now);
+        const timeStr = now.toTimeString().slice(0, 5);
+        
+        document.getElementById('eventStartDate').value = dateStr;
+        document.getElementById('eventStartTime').value = timeStr;
+        document.getElementById('eventEndDate').value = dateStr;
+        
+        // Hora de término = +1 hora
+        const endTime = new Date(now.getTime() + 60 * 60 * 1000);
+        document.getElementById('eventEndTime').value = endTime.toTimeString().slice(0, 5);
+    });
+    
+    // Toggle dia inteiro
+    document.getElementById('eventAllDay').addEventListener('change', function() {
+        const timeInputs = document.querySelectorAll('#eventStartTime, #eventEndTime');
+        timeInputs.forEach(input => {
+            input.disabled = this.checked;
+            if (this.checked) {
+                input.value = '';
+            }
+        });
+    });
+    
+    // Submit do formulário de criação
+    createEventForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const submitBtn = document.getElementById('btnSaveEvent');
+        const originalText = submitBtn.innerHTML;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Salvando...';
+        
+        try {
+            const response = await fetch(APP_URL + 'api/calendar/events', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                // Fecha modal e atualiza calendário
+                bootstrap.Modal.getInstance(createEventModal).hide();
+                calendar.refetchEvents();
+                createEventForm.reset();
+                showToast('Evento criado com sucesso!', 'success');
+            } else {
+                showToast(result.message || 'Erro ao criar evento', 'error');
+            }
+        } catch (error) {
+            console.error('Erro:', error);
+            showToast('Erro de conexão', 'error');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        }
+    });
+    
+    // ========================================
+    // EXCLUIR EVENTO
+    // ========================================
+    let currentEventId = null;
+    let currentEventType = null;
+    
+    document.getElementById('btnDeleteEvent').addEventListener('click', async function() {
+        if (!currentEventId || currentEventType === 'booking') return;
+        
+        if (!confirm('Tem certeza que deseja cancelar este evento?')) return;
+        
+        try {
+            const formData = new FormData();
+            formData.append('id', currentEventId);
+            formData.append('csrf_token', document.querySelector('[name="csrf_token"]')?.value || '');
+            
+            const response = await fetch(APP_URL + 'api/calendar/events/delete', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                modal.hide();
+                calendar.refetchEvents();
+                showToast('Evento cancelado', 'success');
+            } else {
+                showToast(result.message || 'Erro ao cancelar', 'error');
+            }
+        } catch (error) {
+            showToast('Erro de conexão', 'error');
+        }
+    });
+    
+    // ========================================
+    // TOAST NOTIFICATIONS
+    // ========================================
+    function showToast(message, type = 'info') {
+        // Verifica se já existe container de toasts
+        let container = document.querySelector('.toast-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+            container.style.zIndex = '9999';
+            document.body.appendChild(container);
+        }
+        
+        const toastId = 'toast-' + Date.now();
+        const bgClass = type === 'success' ? 'bg-success' : type === 'error' ? 'bg-danger' : 'bg-primary';
+        const icon = type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle';
+        
+        const toastHtml = `
+            <div id="${toastId}" class="toast align-items-center text-white ${bgClass} border-0" role="alert">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <i class="bi bi-${icon} me-2"></i>${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            </div>
+        `;
+        
+        container.insertAdjacentHTML('beforeend', toastHtml);
+        const toastEl = document.getElementById(toastId);
+        const toast = new bootstrap.Toast(toastEl, { delay: 4000 });
+        toast.show();
+        
+        toastEl.addEventListener('hidden.bs.toast', () => toastEl.remove());
+    }
 });
 </script>

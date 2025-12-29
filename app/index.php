@@ -155,7 +155,15 @@ $router->get('/calendar/week', [\CHM\Calendar\CalendarController::class, 'weekVi
 $router->get('/calendar/import', [\CHM\Calendar\CalendarController::class, 'import'], ['auth']);
 $router->post('/calendar/import', [\CHM\Calendar\CalendarController::class, 'import'], ['auth']);
 $router->get('/calendar/export', [\CHM\Calendar\CalendarController::class, 'export'], ['auth']);
-$router->get('/api/calendar/events', [\CHM\Calendar\CalendarController::class, 'events'], ['auth']);
+
+// API Calendar - Eventos, CRUD, Feriados
+$router->get('/api/calendar/events', [\CHM\Calendar\CalendarController::class, 'apiEvents'], ['auth']);
+$router->post('/api/calendar/events', [\CHM\Calendar\CalendarController::class, 'apiCreateEvent'], ['auth']);
+$router->put('/api/calendar/events', [\CHM\Calendar\CalendarController::class, 'apiUpdateEvent'], ['auth']);
+$router->post('/api/calendar/events/update', [\CHM\Calendar\CalendarController::class, 'apiUpdateEvent'], ['auth']);
+$router->post('/api/calendar/events/delete', [\CHM\Calendar\CalendarController::class, 'apiDeleteEvent'], ['auth']);
+$router->get('/api/calendar/event', [\CHM\Calendar\CalendarController::class, 'apiGetEvent'], ['auth']);
+$router->get('/api/calendar/holidays', [\CHM\Calendar\CalendarController::class, 'apiHolidays'], ['auth']);
 
 $router->get('/clients', [\CHM\Clients\ClientController::class, 'index'], ['auth']);
 $router->get('/clients/create', [\CHM\Clients\ClientController::class, 'create'], ['auth']);
