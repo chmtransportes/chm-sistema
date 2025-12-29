@@ -99,10 +99,20 @@ define('LOGIN_LOCKOUT_TIME', 900);
 define('MAX_UPLOAD_SIZE', 10 * 1024 * 1024);
 define('ALLOWED_EXTENSIONS', ['jpg', 'jpeg', 'png', 'gif', 'webp', 'pdf', 'doc', 'docx', 'xls', 'xlsx']);
 
-// Backup
-define('BACKUP_INTERVAL', 600);
+// Backup - Zero Trust / Fail-Safe
+define('BACKUP_INTERVAL', 21600); // 6 horas em segundos
 define('BACKUP_RETENTION_DAYS', 30);
 define('MAX_BACKUPS', 100);
+define('BACKUP_DAILY_RETENTION', 7);
+define('BACKUP_WEEKLY_RETENTION', 30);
+define('BACKUP_MONTHLY_RETENTION', 90);
+
+// FTP para espelhamento de backup (segundo local independente)
+define('FTP_HOST', EnvLoader::get('FTP_HOST', '186.209.113.108'));
+define('FTP_PORT', EnvLoader::get('FTP_PORT', '21'));
+define('FTP_USER', EnvLoader::get('FTP_USER', ''));
+define('FTP_PASS', EnvLoader::get('FTP_PASS', ''));
+define('FTP_BACKUP_DIR', '/backups/');
 
 // WhatsApp Business API
 define('WHATSAPP_API_URL', 'https://graph.facebook.com/v18.0/');

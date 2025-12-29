@@ -1,0 +1,50 @@
+# =============================================================================
+# CHM Sistema - Configuração de CRON para Produção
+# @author ch-mestriner (https://ch-mestriner.com.br)
+# @date 29/12/2025
+# =============================================================================
+#
+# INSTALAÇÃO:
+# 1. Acesse o servidor via SSH ou painel cPanel/Plesk
+# 2. Edite o crontab: crontab -e
+# 3. Cole as linhas abaixo (ajuste o caminho se necessário)
+# 4. Salve e saia
+#
+# CAMINHOS (ajuste conforme seu servidor):
+# - Produção Napoleão: /home/chmtrans/chm-sistema.com.br
+# - Local: /home/chm/Documentos/CHM-SISTEMA
+#
+# =============================================================================
+
+# Variáveis de ambiente
+SHELL=/bin/bash
+PATH=/usr/local/bin:/usr/bin:/bin
+MAILTO=""
+
+# -----------------------------------------------------------------------------
+# BACKUP COMPLETO (código + banco) - Diário às 03:00
+# Mantém histórico de 7 dias diários, 4 semanas, 3 meses
+# -----------------------------------------------------------------------------
+0 3 * * * /usr/bin/php /home/chmtrans/chm-sistema.com.br/scripts/backup-cron.php full >> /home/chmtrans/chm-sistema.com.br/logs/cron-backup.log 2>&1
+
+# -----------------------------------------------------------------------------
+# BACKUP DO BANCO DE DADOS - A cada 6 horas (00:00, 06:00, 12:00, 18:00)
+# Mais frequente para minimizar perda de dados
+# -----------------------------------------------------------------------------
+0 0,6,12,18 * * * /usr/bin/php /home/chmtrans/chm-sistema.com.br/scripts/backup-cron.php database >> /home/chmtrans/chm-sistema.com.br/logs/cron-backup.log 2>&1
+
+# -----------------------------------------------------------------------------
+# VERIFICAÇÃO DE INTEGRIDADE - Semanal (Domingo às 04:00)
+# Verifica se os backups estão íntegros e podem ser restaurados
+# -----------------------------------------------------------------------------
+0 4 * * 0 /usr/bin/php /home/chmtrans/chm-sistema.com.br/scripts/backup-cron.php verify >> /home/chmtrans/chm-sistema.com.br/logs/cron-backup.log 2>&1
+
+# -----------------------------------------------------------------------------
+# LIMPEZA DE LOGS - Mensal (Dia 1 às 05:00)
+# Remove logs com mais de 30 dias
+# -----------------------------------------------------------------------------
+0 5 1 * * find /home/chmtrans/chm-sistema.com.br/logs -name "*.log" -mtime +30 -delete 2>/dev/null
+
+# =============================================================================
+# FIM DA CONFIGURAÇÃO
+# =============================================================================
