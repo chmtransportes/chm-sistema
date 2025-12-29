@@ -28,17 +28,41 @@ $ftpConfig = [
 
 // Diretório local do projeto
 $localDir = __DIR__ . '/app';
+$rootDir = __DIR__;
+
+// Arquivos raiz que devem ser enviados para /
+$rootFiles = [
+    'index.php',
+    '.htaccess'
+];
 
 // Arquivos/pastas a ignorar no upload
 $ignore = [
     '.git',
     '.gitignore',
+    '.github',
     'node_modules',
     '.DS_Store',
     'Thumbs.db',
     '*.log',
-    'backups/*',
-    'uploads/*'
+    '*.md',
+    'backups',
+    'backup',
+    'logs',
+    'uploads',
+    'scripts',
+    'docs',
+    'deploy-ftp.php',
+    'install.php',
+    'migrate-production.php',
+    'backup-auto.php',
+    'backup-automatico.sh',
+    'cron-backup.php',
+    'upload-fix.php',
+    'sync_config.jsonc',
+    'debug*.php',
+    'test.php',
+    'index-debug.php'
 ];
 
 // Contadores
@@ -169,23 +193,31 @@ function executeDeploy() {
         }
         echo "    ✓ Diretório: {$ftpConfig['root']}\n\n";
         
-        // 3. Fazer upload dos arquivos
-        echo "[3/5] Iniciando upload dos arquivos...\n";
-        echo "    Origem: {$localDir}\n";
-        echo "    Destino: {$ftpConfig['root']}\n\n";
-        
-        uploadDirectory($conn, $localDir, '', $ignore);
-        
-        echo "\n";
-        
-        // 4. Upload do .htaccess raiz (se existir)
-        echo "[4/5] Configurando arquivos especiais...\n";
-        $htaccessLocal = __DIR__ . '/app/.htaccess';
-        if (file_exists($htaccessLocal)) {
-            if (@ftp_put($conn, '/.htaccess', $htaccessLocal, FTP_ASCII)) {
-                echo "    ✓ .htaccess configurado\n";
+        // 3. Upload dos arquivos raiz (index.php, .htaccess)
+        echo "[3/5] Enviando arquivos raiz...\n";
+        $rootDir = dirname($localDir);
+        foreach (['index.php', '.htaccess'] as $rootFile) {
+            $localFile = $rootDir . '/' . $rootFile;
+            if (file_exists($localFile)) {
+                if (@ftp_put($conn, '/' . $rootFile, $localFile, FTP_ASCII)) {
+                    echo "    ✓ {$rootFile} enviado\n";
+                    $stats['uploaded']++;
+                } else {
+                    echo "    ✗ Erro ao enviar {$rootFile}\n";
+                    $stats['errors']++;
+                }
             }
         }
+        echo "\n";
+        
+        // 4. Fazer upload da pasta app
+        echo "[4/5] Enviando pasta app...\n";
+        echo "    Origem: {$localDir}\n";
+        echo "    Destino: /app/\n\n";
+        
+        ftpMkdirRecursive($conn, '/app');
+        uploadDirectory($conn, $localDir, '/app', $ignore);
+        
         echo "\n";
         
         // 5. Finalizar

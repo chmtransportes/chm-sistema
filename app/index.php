@@ -2,8 +2,8 @@
 /**
  * CHM Sistema - Front Controller
  * @author ch-mestriner (https://ch-mestriner.com.br)
- * @date 27/12/2025 14:30
- * @version 2.3.4
+ * @date 29/12/2025 16:15
+ * @version 2.4.0
  * 
  * Bootstrap principal - compatível com hospedagem compartilhada
  */
