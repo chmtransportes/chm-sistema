@@ -56,12 +56,14 @@ define('DB_PREFIX', 'chm_');
 if (EnvLoader::isProduction()) {
     define('BASE_URL', 'https://chm-sistema.com.br/');
     define('APP_URL', BASE_URL);
+    define('ASSETS_URL', BASE_URL . 'app/assets/');
+    define('API_URL', BASE_URL . 'api/');
 } else {
     define('BASE_URL', 'http://localhost/chm-sistema/');
     define('APP_URL', BASE_URL . 'app/');
+    define('ASSETS_URL', APP_URL . 'assets/');
+    define('API_URL', APP_URL . 'api/');
 }
-define('ASSETS_URL', APP_URL . 'assets/');
-define('API_URL', APP_URL . 'api/');
 
 // Caminhos - só define se não existir
 if (!defined('ROOT_PATH')) {

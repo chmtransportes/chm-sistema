@@ -17,10 +17,10 @@ $csrfToken = Session::getCsrfToken();
     <title>Login | CHM Sistema</title>
     
     <!-- Favicon CHM -->
-    <link rel="icon" href="/assets/icons/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
-    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+    <link rel="icon" href="<?= ASSETS_URL ?>icons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= ASSETS_URL ?>icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= ASSETS_URL ?>icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="<?= ASSETS_URL ?>icons/apple-touch-icon.png">
     <link rel="manifest" href="<?= APP_URL ?>manifest.json">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
