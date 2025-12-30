@@ -861,15 +861,22 @@ body {
     font-size: 18px;
 }
 
-/* Desktop: Esconder elementos mobile */
+/* Desktop: Layout ORIGINAL - esconder elementos mobile */
 @media (min-width: 992px) {
     .btn-hamburger {
         display: none !important;
     }
     
-    .topbar-brand-mobile {
-        justify-content: flex-start;
+    .topbar-logo {
         flex: 0;
+    }
+    
+    .topbar-logo img {
+        height: 36px !important;
+    }
+    
+    .topbar-spacer {
+        display: none !important;
     }
     
     .topbar-actions-desktop {
