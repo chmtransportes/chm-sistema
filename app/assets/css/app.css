@@ -884,7 +884,7 @@ body {
     }
 }
 
-/* === DESKTOP (992px+) - INALTERADO === */
+/* === DESKTOP (992px+) === */
 @media (min-width: 992px) {
     .mobile-hamburger {
         display: none !important;
@@ -897,6 +897,26 @@ body {
     
     .topbar-spacer {
         display: none;
+    }
+    
+    /* Sidebar compacto no desktop - sem logo */
+    .sidebar-header {
+        display: none !important;
+    }
+    
+    .sidebar-user {
+        padding-top: 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding-bottom: 15px;
+        margin-bottom: 10px;
+    }
+    
+    .sidebar {
+        width: 220px;
+    }
+    
+    .main-content {
+        margin-left: 220px;
     }
     
     .desktop-only {
