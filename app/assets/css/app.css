@@ -758,6 +758,14 @@ body {
     justify-content: space-between;
     padding: 8px 12px;
     gap: 10px;
+    height: 56px;
+    min-height: 56px;
+    max-height: 56px;
+    background: #fff;
+    border-bottom: 1px solid #e9ecef;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 /* Logo Mobile - Centralizado */
@@ -766,12 +774,15 @@ body {
     align-items: center;
     flex: 1;
     justify-content: center;
+    overflow: hidden;
 }
 
 .topbar-brand-mobile img {
-    height: 42px;
-    width: auto;
-    max-width: 140px;
+    height: 38px !important;
+    width: auto !important;
+    max-width: 100px !important;
+    max-height: 38px !important;
+    object-fit: contain !important;
 }
 
 /* Hamburger - Direita no Mobile */

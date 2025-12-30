@@ -153,7 +153,7 @@ $csrfToken = Session::getCsrfToken();
         <header class="topbar">
             <!-- Logo centralizado no mobile -->
             <a href="<?= APP_URL ?>dashboard" class="topbar-brand-mobile">
-                <img src="<?= ASSETS_URL ?>img/logo-chm.png" alt="CHM Sistema">
+                <img src="<?= ASSETS_URL ?>img/logo-chm.png" alt="CHM" style="height: 38px !important; width: auto !important; max-width: 100px !important; object-fit: contain;">
             </a>
 
             <?php if (isset($breadcrumb) && is_array($breadcrumb)): ?>
