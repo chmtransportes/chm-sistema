@@ -504,7 +504,7 @@ body {
 
 /* Mobile First - Até 768px */
 @media (max-width: 768px) {
-    /* Sidebar Mobile - usa transform para melhor performance */
+    /* Sidebar Mobile */
     .sidebar {
         width: 100%;
         max-width: 280px;
@@ -514,80 +514,118 @@ body {
     .main-content {
         margin-left: 0 !important;
         width: 100% !important;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
     }
     
-    /* Topbar Mobile */
-    .topbar {
-        padding: 10px 15px !important;
+    /* Page Content Mobile - COMPACTO */
+    .page-content {
+        padding: 10px !important;
+        flex: 1;
     }
     
-    .topbar-actions {
-        gap: 8px !important;
+    /* DASHBOARD CARDS COMPACTOS */
+    .card {
+        margin-bottom: 8px !important;
+        border-radius: 10px;
     }
     
-    /* Cards em 1 coluna no mobile */
+    .card-body {
+        padding: 12px !important;
+    }
+    
+    .card-header {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    
+    /* Stat Cards ULTRA COMPACTOS */
+    .stat-card {
+        padding: 10px 12px !important;
+        gap: 10px !important;
+        margin-bottom: 8px !important;
+    }
+    
+    .stat-card h2,
+    .stat-card h3,
+    .stat-info h3 {
+        font-size: 1.3rem !important;
+        margin: 0 !important;
+    }
+    
+    .stat-info p {
+        font-size: 12px !important;
+        margin: 2px 0 0 !important;
+    }
+    
+    .stat-icon {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 18px !important;
+        border-radius: 10px !important;
+    }
+    
+    /* Row gaps reduzidos */
+    .row {
+        --bs-gutter-y: 0.5rem;
+        --bs-gutter-x: 0.5rem;
+    }
+    
+    .row.g-3, .row.g-4 {
+        --bs-gutter-y: 0.5rem !important;
+        --bs-gutter-x: 0.5rem !important;
+    }
+    
+    /* Cards em colunas no mobile */
     .row > [class*="col-md-"],
     .row > [class*="col-lg-"] {
         flex: 0 0 100%;
         max-width: 100%;
-        margin-bottom: 15px;
+        margin-bottom: 0;
+        padding: 4px !important;
     }
     
-    /* Stat Cards Mobile */
-    .stat-card {
-        padding: 15px !important;
-    }
-    
-    .stat-card h2 {
-        font-size: 1.5rem !important;
+    /* Cards de resumo financeiro - 2 por linha */
+    .row > .col-md-3,
+    .row > .col-lg-3 {
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
     }
     
     /* Botões Touch-Friendly */
     .btn {
-        min-height: 44px;
-        padding: 10px 16px;
+        min-height: 42px;
+        padding: 8px 14px;
         font-size: 14px;
     }
     
     .btn-sm {
-        min-height: 38px;
-        padding: 8px 12px;
+        min-height: 36px;
+        padding: 6px 10px;
+        font-size: 13px;
     }
     
     /* Tabelas responsivas */
     .table-responsive {
-        font-size: 13px;
+        font-size: 12px;
     }
     
     .table td, .table th {
-        padding: 8px 10px;
+        padding: 6px 8px;
         white-space: nowrap;
     }
     
     /* Forms Mobile */
     .form-control, .form-select {
-        min-height: 44px;
-        font-size: 16px; /* Evita zoom no iOS */
-    }
-    
-    /* Page Content Mobile */
-    .page-content {
-        padding: 15px !important;
-    }
-    
-    /* Cards Mobile */
-    .card {
-        margin-bottom: 15px;
-    }
-    
-    .card-body {
-        padding: 15px;
+        min-height: 42px;
+        font-size: 16px;
     }
     
     /* FAB Mobile */
     .fab-container {
-        bottom: 15px;
-        right: 15px;
+        bottom: 80px; /* Acima do footer */
+        right: 12px;
     }
     
     .fab {
@@ -596,22 +634,27 @@ body {
         font-size: 20px;
     }
     
+    /* Títulos Mobile */
+    h1, .h1 { font-size: 1.5rem !important; }
+    h2, .h2 { font-size: 1.25rem !important; }
+    h3, .h3 { font-size: 1.1rem !important; }
+    
+    /* Ocultar breadcrumb no mobile */
+    .breadcrumb {
+        display: none !important;
+    }
+    
+    /* Ocultar colunas secundárias em tabelas */
+    .table .hide-mobile {
+        display: none !important;
+    }
+    
     /* Mobile Only */
     .mobile-only {
         display: block !important;
     }
     
     .desktop-only {
-        display: none !important;
-    }
-    
-    /* Ocultar breadcrumb no mobile */
-    .breadcrumb {
-        display: none;
-    }
-    
-    /* Ocultar colunas secundárias em tabelas */
-    .table .hide-mobile {
         display: none !important;
     }
 }
@@ -702,9 +745,38 @@ body {
    @date 29/12/2025
    ============================================ */
 
-/* Botão Hamburger - SEMPRE VISÍVEL NO MOBILE */
+/* ============================================
+   MOBILE-FIRST UI REFACTOR
+   @author ch-mestriner (https://ch-mestriner.com.br)
+   @date 29/12/2025
+   ============================================ */
+
+/* Topbar Mobile-First */
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    gap: 10px;
+}
+
+/* Logo Mobile - Centralizado */
+.topbar-brand-mobile {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+}
+
+.topbar-brand-mobile img {
+    height: 42px;
+    width: auto;
+    max-width: 140px;
+}
+
+/* Hamburger - Direita no Mobile */
 .btn-hamburger {
-    display: none; /* Escondido no desktop */
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 48px;
@@ -712,61 +784,98 @@ body {
     padding: 0;
     background: var(--primary);
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     color: #fff;
-    font-size: 28px;
+    font-size: 26px;
     flex-shrink: 0;
+    order: 3; /* Força para direita */
 }
 
 .btn-hamburger:hover,
 .btn-hamburger:focus {
     background: var(--secondary);
-    transform: scale(1.05);
 }
 
 .btn-hamburger:active {
     transform: scale(0.95);
 }
 
-/* Topbar Brand Mobile */
-.topbar-brand {
-    display: none; /* Escondido no desktop */
+/* Desktop Actions - Escondido no mobile */
+.topbar-actions-desktop {
+    display: none;
     align-items: center;
-    margin-left: 12px;
+    gap: 12px;
 }
 
-.topbar-logo-mobile {
-    height: 45px;
-    width: auto;
+.breadcrumb-desktop {
+    display: none;
 }
 
-/* Mobile: Mostrar hamburger e logo */
-@media (max-width: 991.98px) {
+/* Mobile Footer com Logout */
+.mobile-footer {
+    display: block;
+    padding: 15px;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    margin-top: auto;
+}
+
+.mobile-logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 20px;
+    background: #fff;
+    border: 2px solid var(--danger);
+    border-radius: 10px;
+    color: var(--danger);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.2s ease;
+}
+
+.mobile-logout-btn:hover {
+    background: var(--danger);
+    color: #fff;
+}
+
+.mobile-logout-btn i {
+    font-size: 18px;
+}
+
+/* Desktop: Esconder elementos mobile */
+@media (min-width: 992px) {
     .btn-hamburger {
+        display: none !important;
+    }
+    
+    .topbar-brand-mobile {
+        justify-content: flex-start;
+        flex: 0;
+    }
+    
+    .topbar-actions-desktop {
         display: flex !important;
     }
     
-    .topbar-brand {
-        display: flex !important;
+    .breadcrumb-desktop {
+        display: block !important;
+        flex: 1;
+        margin-left: 20px;
     }
     
-    .topbar-logo-mobile {
-        height: 40px;
-    }
-}
-
-/* Telas muito pequenas */
-@media (max-width: 480px) {
-    .topbar-logo-mobile {
-        height: 36px;
+    .mobile-footer {
+        display: none !important;
     }
     
-    .btn-hamburger {
-        width: 44px;
-        height: 44px;
-        font-size: 24px;
+    .topbar {
+        padding: 0 20px;
+        height: var(--topbar-height);
     }
 }
 

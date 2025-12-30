@@ -149,18 +149,15 @@ $csrfToken = Session::getCsrfToken();
 
     <!-- Main Content -->
     <main id="main-content" class="main-content">
-        <!-- Top Bar -->
+        <!-- Top Bar Mobile-First -->
         <header class="topbar">
-            <button class="btn-hamburger" onclick="toggleSidebar()" aria-label="Menu">
-                <i class="bi bi-list"></i>
-            </button>
-            
-            <a href="<?= APP_URL ?>dashboard" class="topbar-brand">
-                <img src="<?= ASSETS_URL ?>img/logo-chm.png" alt="CHM" class="topbar-logo-mobile">
+            <!-- Logo centralizado no mobile -->
+            <a href="<?= APP_URL ?>dashboard" class="topbar-brand-mobile">
+                <img src="<?= ASSETS_URL ?>img/logo-chm.png" alt="CHM Sistema">
             </a>
 
             <?php if (isset($breadcrumb) && is_array($breadcrumb)): ?>
-            <nav aria-label="breadcrumb" class="d-none d-md-block">
+            <nav aria-label="breadcrumb" class="breadcrumb-desktop">
                 <ol class="breadcrumb mb-0">
                     <?php foreach ($breadcrumb as $i => $item): ?>
                     <?php if (isset($item['url'])): ?>
@@ -173,11 +170,16 @@ $csrfToken = Session::getCsrfToken();
             </nav>
             <?php endif; ?>
 
-            <div class="topbar-actions ms-auto d-flex align-items-center gap-2">
-                <span class="user-name-topbar d-none d-md-inline"><?= htmlspecialchars($userName) ?></span>
-                <a href="<?= APP_URL ?>logout" class="btn btn-outline-danger btn-sm" title="Sair do sistema">
-                    <i class="bi bi-box-arrow-right"></i>
-                    <span class="d-none d-md-inline ms-1">Sair</span>
+            <!-- Hamburger à direita no mobile -->
+            <button class="btn-hamburger" onclick="toggleSidebar()" aria-label="Menu">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <!-- Desktop: user name e logout -->
+            <div class="topbar-actions-desktop">
+                <span class="user-name-topbar"><?= htmlspecialchars($userName) ?></span>
+                <a href="<?= APP_URL ?>logout" class="btn btn-outline-danger btn-sm" title="Sair">
+                    <i class="bi bi-box-arrow-right me-1"></i>Sair
                 </a>
             </div>
         </header>
@@ -201,6 +203,14 @@ $csrfToken = Session::getCsrfToken();
         <div class="page-content">
             <?= $content ?>
         </div>
+        
+        <!-- Mobile Footer com Logout -->
+        <footer class="mobile-footer">
+            <a href="<?= APP_URL ?>logout" class="mobile-logout-btn">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sair do Sistema</span>
+            </a>
+        </footer>
     </main>
 
     <!-- Overlay for mobile sidebar -->
