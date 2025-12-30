@@ -922,10 +922,10 @@ body {
     background: rgba(255,255,255,0.1);
 }
 
-/* App Footer - Desktop: rodapé no final da página */
+/* App Footer - Todas as telas */
 .app-footer {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    color: rgba(255,255,255,0.9);
+    background: var(--primary);
+    color: rgba(255,255,255,0.8);
     text-align: center;
     padding: 20px 16px;
     margin-top: auto;
@@ -934,14 +934,19 @@ body {
 
 .app-footer p {
     margin: 0;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
 }
 
-/* Mobile/Tablet: esconder footer */
+/* Mobile/Tablet: footer visível */
 @media (max-width: 991.98px) {
     .app-footer {
-        display: none;
+        padding: 16px 12px;
+        margin-top: 20px;
+    }
+    
+    .app-footer p {
+        font-size: 12px;
     }
 }
