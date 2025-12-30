@@ -756,7 +756,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 12px 16px;
-    height: 112px;
+    height: 128px;
     background: #fff;
     border-bottom: 1px solid #ddd;
     position: fixed;
@@ -840,7 +840,7 @@ body {
 
 /* Main content - compensar header fixo */
 .main-content {
-    padding-top: 120px;
+    padding-top: 136px;
 }
 
 /* Page content mobile - BRANCO LIMPO */
@@ -853,6 +853,25 @@ body {
     
     .hide-on-mobile {
         display: none !important;
+    }
+    
+    /* Esconder FAB no mobile */
+    .fab-container {
+        display: none !important;
+    }
+    
+    /* Título Dashboard centralizado */
+    .container-fluid > .d-flex.justify-content-between {
+        justify-content: center !important;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 16px;
+        gap: 8px;
+    }
+    
+    .container-fluid > .d-flex.justify-content-between h4 {
+        font-size: 1.5rem;
+        font-weight: 600;
     }
 }
 
