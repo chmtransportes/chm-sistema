@@ -151,9 +151,17 @@ $csrfToken = Session::getCsrfToken();
     <main id="main-content" class="main-content">
         <!-- Top Bar -->
         <header class="topbar">
-            <button class="btn btn-link sidebar-toggle d-lg-none" onclick="toggleSidebar()">
-                <i class="bi bi-list fs-4"></i>
+            <button class="btn btn-hamburger d-lg-none" onclick="toggleSidebar()" aria-label="Menu">
+                <span class="hamburger-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
             </button>
+            
+            <a href="<?= APP_URL ?>dashboard" class="topbar-brand d-lg-none">
+                <img src="<?= ASSETS_URL ?>img/logo-chm.png" alt="CHM" style="height: 32px;">
+            </a>
 
             <?php if (isset($breadcrumb) && is_array($breadcrumb)): ?>
             <nav aria-label="breadcrumb" class="d-none d-md-block">
@@ -170,8 +178,10 @@ $csrfToken = Session::getCsrfToken();
             <?php endif; ?>
 
             <div class="topbar-actions ms-auto d-flex align-items-center gap-2">
-                <a href="<?= APP_URL ?>logout" class="btn btn-outline-danger btn-sm d-none d-md-inline-flex" title="Sair do sistema">
-                    <i class="bi bi-box-arrow-right me-1"></i> Sair
+                <span class="user-name-topbar d-none d-md-inline"><?= htmlspecialchars($userName) ?></span>
+                <a href="<?= APP_URL ?>logout" class="btn btn-outline-danger btn-sm" title="Sair do sistema">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span class="d-none d-md-inline ms-1">Sair</span>
                 </a>
             </div>
         </header>

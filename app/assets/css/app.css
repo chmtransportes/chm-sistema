@@ -342,17 +342,19 @@ body {
 .sidebar-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.6);
     z-index: 999;
     opacity: 0;
     visibility: hidden;
     transition: var(--transition);
+    backdrop-filter: blur(2px);
 }
 
-/* Mobile Responsive */
+/* Mobile Responsive - Menu Hamburger */
 @media (max-width: 991.98px) {
     .sidebar {
         transform: translateX(-100%);
+        box-shadow: 4px 0 25px rgba(0,0,0,0.3);
     }
 
     .main-content {
@@ -366,6 +368,32 @@ body {
     body.sidebar-open .sidebar-overlay {
         opacity: 1;
         visibility: visible;
+    }
+    
+    /* Sidebar Mobile - mais bonita */
+    .sidebar-nav .nav-link {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+    
+    .sidebar-nav .nav-link i {
+        font-size: 20px;
+    }
+    
+    .nav-header {
+        padding: 18px 20px 10px;
+        font-size: 12px;
+    }
+    
+    /* User info no sidebar mobile */
+    .sidebar-user {
+        padding: 15px 20px;
+    }
+    
+    /* Topbar Mobile */
+    .topbar {
+        padding: 8px 12px;
+        gap: 8px;
     }
 
     .page-content {
@@ -665,6 +693,76 @@ body {
 .user-name-topbar {
     font-size: 14px;
     font-weight: 500;
+    color: #6c757d;
+}
+
+/* ============================================
+   MENU HAMBURGER MOBILE
+   @author ch-mestriner (https://ch-mestriner.com.br)
+   @date 29/12/2025
+   ============================================ */
+
+/* Botão Hamburger */
+.btn-hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: var(--primary);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-hamburger:hover,
+.btn-hamburger:focus {
+    background: var(--secondary);
+    transform: scale(1.05);
+}
+
+.hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 22px;
+    height: 16px;
+}
+
+.hamburger-icon span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Animação do hamburger quando aberto */
+body.sidebar-open .hamburger-icon span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+body.sidebar-open .hamburger-icon span:nth-child(2) {
+    opacity: 0;
+}
+
+body.sidebar-open .hamburger-icon span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Topbar Brand Mobile */
+.topbar-brand {
+    display: flex;
+    align-items: center;
+    margin-left: 12px;
+}
+
+.topbar-brand img {
+    height: 32px;
+    width: auto;
 }
 
 /* Botão X fechar sidebar mobile */
