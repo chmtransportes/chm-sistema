@@ -151,16 +151,12 @@ $csrfToken = Session::getCsrfToken();
     <main id="main-content" class="main-content">
         <!-- Top Bar -->
         <header class="topbar">
-            <button class="btn btn-hamburger d-lg-none" onclick="toggleSidebar()" aria-label="Menu">
-                <span class="hamburger-icon">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </span>
+            <button class="btn-hamburger" onclick="toggleSidebar()" aria-label="Menu">
+                <i class="bi bi-list"></i>
             </button>
             
-            <a href="<?= APP_URL ?>dashboard" class="topbar-brand d-lg-none">
-                <img src="<?= ASSETS_URL ?>img/logo-chm.png" alt="CHM" style="height: 32px;">
+            <a href="<?= APP_URL ?>dashboard" class="topbar-brand">
+                <img src="<?= ASSETS_URL ?>img/logo-chm.png" alt="CHM" class="topbar-logo-mobile">
             </a>
 
             <?php if (isset($breadcrumb) && is_array($breadcrumb)): ?>

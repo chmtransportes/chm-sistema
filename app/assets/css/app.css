@@ -702,19 +702,22 @@ body {
    @date 29/12/2025
    ============================================ */
 
-/* Botão Hamburger */
+/* Botão Hamburger - SEMPRE VISÍVEL NO MOBILE */
 .btn-hamburger {
-    display: flex;
+    display: none; /* Escondido no desktop */
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     padding: 0;
     background: var(--primary);
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
+    color: #fff;
+    font-size: 28px;
+    flex-shrink: 0;
 }
 
 .btn-hamburger:hover,
@@ -723,46 +726,48 @@ body {
     transform: scale(1.05);
 }
 
-.hamburger-icon {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 22px;
-    height: 16px;
-}
-
-.hamburger-icon span {
-    display: block;
-    width: 100%;
-    height: 2px;
-    background: #fff;
-    border-radius: 2px;
-    transition: all 0.3s ease;
-}
-
-/* Animação do hamburger quando aberto */
-body.sidebar-open .hamburger-icon span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-
-body.sidebar-open .hamburger-icon span:nth-child(2) {
-    opacity: 0;
-}
-
-body.sidebar-open .hamburger-icon span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
+.btn-hamburger:active {
+    transform: scale(0.95);
 }
 
 /* Topbar Brand Mobile */
 .topbar-brand {
-    display: flex;
+    display: none; /* Escondido no desktop */
     align-items: center;
     margin-left: 12px;
 }
 
-.topbar-brand img {
-    height: 32px;
+.topbar-logo-mobile {
+    height: 45px;
     width: auto;
+}
+
+/* Mobile: Mostrar hamburger e logo */
+@media (max-width: 991.98px) {
+    .btn-hamburger {
+        display: flex !important;
+    }
+    
+    .topbar-brand {
+        display: flex !important;
+    }
+    
+    .topbar-logo-mobile {
+        height: 40px;
+    }
+}
+
+/* Telas muito pequenas */
+@media (max-width: 480px) {
+    .topbar-logo-mobile {
+        height: 36px;
+    }
+    
+    .btn-hamburger {
+        width: 44px;
+        height: 44px;
+        font-size: 24px;
+    }
 }
 
 /* Botão X fechar sidebar mobile */
