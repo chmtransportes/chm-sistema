@@ -168,6 +168,8 @@ body {
     margin-left: var(--sidebar-width);
     min-height: 100vh;
     transition: var(--transition);
+    display: flex;
+    flex-direction: column;
 }
 
 .topbar {
@@ -191,6 +193,7 @@ body {
 
 .page-content {
     padding: 20px;
+    flex: 1;
 }
 
 /* Cards */
@@ -919,13 +922,13 @@ body {
     background: rgba(255,255,255,0.1);
 }
 
-/* App Footer - Todas as telas */
+/* App Footer - Desktop: rodapé no final da página */
 .app-footer {
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     color: rgba(255,255,255,0.9);
     text-align: center;
     padding: 20px 16px;
-    margin-top: 40px;
+    margin-top: auto;
     border-top: 1px solid rgba(255,255,255,0.1);
 }
 
@@ -936,10 +939,9 @@ body {
     letter-spacing: 0.5px;
 }
 
+/* Mobile/Tablet: esconder footer */
 @media (max-width: 991.98px) {
     .app-footer {
-        padding: 16px 12px;
-        margin-top: 24px;
-        font-size: 13px;
+        display: none;
     }
 }
