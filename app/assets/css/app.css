@@ -905,10 +905,24 @@ body {
     }
     
     .sidebar-user {
-        padding-top: 20px;
+        padding: 16px 20px;
         border-bottom: 1px solid rgba(255,255,255,0.1);
-        padding-bottom: 15px;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
+    }
+    
+    .sidebar-user .user-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+    }
+    
+    .sidebar-user .user-name {
+        font-size: 15px;
+        font-weight: 500;
+    }
+    
+    .sidebar-user .user-role {
+        display: none;
     }
     
     .sidebar {
