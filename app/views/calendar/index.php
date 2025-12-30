@@ -809,7 +809,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form id="createEventForm">
-                <input type="hidden" name="csrf_token" value="<?= $csrfToken ?? '' ?>">
+                <input type="hidden" name="_token" value="<?= $csrfToken ?? '' ?>">
                 <div class="modal-body">
                     <div class="row g-3">
                         <!-- Título -->
@@ -1322,8 +1322,17 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             const response = await fetch(APP_URL + 'api/calendar/events', {
                 method: 'POST',
-                body: formData
+                body: formData,
+                credentials: 'same-origin'
             });
+            
+            // Verifica se a resposta é válida
+            if (!response.ok) {
+                const text = await response.text();
+                console.error('Resposta HTTP:', response.status, text);
+                showToast('Erro: ' + response.status + ' - Verifique o console', 'error');
+                return;
+            }
             
             const result = await response.json();
             
@@ -1337,8 +1346,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 showToast(result.message || 'Erro ao criar evento', 'error');
             }
         } catch (error) {
-            console.error('Erro:', error);
-            showToast('Erro de conexão', 'error');
+            console.error('Erro detalhado:', error);
+            showToast('Erro: ' + (error.message || 'Verifique o console'), 'error');
         } finally {
             submitBtn.disabled = false;
             submitBtn.innerHTML = originalText;
@@ -1359,7 +1368,7 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             const formData = new FormData();
             formData.append('id', currentEventId);
-            formData.append('csrf_token', document.querySelector('[name="csrf_token"]')?.value || '');
+            formData.append('_token', document.querySelector('[name="_token"]')?.value || '');
             
             const response = await fetch(APP_URL + 'api/calendar/events/delete', {
                 method: 'POST',

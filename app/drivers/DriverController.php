@@ -39,7 +39,7 @@ class DriverController extends Controller
     {
         $this->requireAuth();
         $this->setTitle('Novo Motorista');
-        $this->setData('nextDriverNumber', 130);
+        $this->setData('nextDriverNumber', $this->model->getNextDriverNumber());
         $this->view('drivers.form');
     }
 
@@ -203,6 +203,20 @@ class DriverController extends Controller
         
         $drivers = $this->model->getAvailableForDate($date, $time);
         $this->json(['success' => true, 'data' => $drivers]);
+    }
+
+    // API: Busca motorista por ID para visualização rápida
+    public function apiShow(string $id): void
+    {
+        $this->requireAuth();
+        $driver = $this->model->find((int)$id);
+        
+        if (!$driver) {
+            $this->error('Motorista não encontrado', 404);
+            return;
+        }
+        
+        $this->json(['success' => true, 'data' => $driver]);
     }
 
     // Upload de foto

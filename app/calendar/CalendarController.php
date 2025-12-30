@@ -39,6 +39,7 @@ class CalendarController extends Controller
         
         $this->setData('clients', $clientModel->getForSelect());
         $this->setData('drivers', $driverModel->getForSelect());
+        $this->setData('csrfToken', Session::getCsrfToken());
         
         $this->setTitle('Agenda');
         $this->view('calendar.index');
@@ -155,7 +156,7 @@ class CalendarController extends Controller
         $this->requireAuth();
         
         if (!$this->validateCsrf()) {
-            $this->jsonError('Token inválido', 403);
+            $this->error('Token inválido', 403);
             return;
         }
         
@@ -167,7 +168,7 @@ class CalendarController extends Controller
         $validator->rule('start_time', 'required', 'Hora de início');
         
         if (!$validator->validate()) {
-            $this->jsonError($validator->getFirstError(), 400);
+            $this->error($validator->getFirstError(), 400);
             return;
         }
         
@@ -206,9 +207,9 @@ class CalendarController extends Controller
             
             Helpers::logAction('Evento de agenda criado', 'calendar', null, ['id' => $id, 'title' => $data['title']]);
             
-            $this->jsonSuccess('Evento criado com sucesso', ['id' => $id]);
+            $this->success('Evento criado com sucesso', ['id' => $id]);
         } else {
-            $this->jsonError('Erro ao criar evento');
+            $this->error('Erro ao criar evento');
         }
     }
     
@@ -218,7 +219,7 @@ class CalendarController extends Controller
         $this->requireAuth();
         
         if (!$this->validateCsrf()) {
-            $this->jsonError('Token inválido', 403);
+            $this->error('Token inválido', 403);
             return;
         }
         
@@ -226,13 +227,13 @@ class CalendarController extends Controller
         $event = $this->calendarModel->find($id);
         
         if (!$event) {
-            $this->jsonError('Evento não encontrado', 404);
+            $this->error('Evento não encontrado', 404);
             return;
         }
         
         // Verifica permissão
         if ($event['user_id'] != Session::getUserId() && !Session::isAdmin()) {
-            $this->jsonError('Sem permissão', 403);
+            $this->error('Sem permissão', 403);
             return;
         }
         
@@ -259,9 +260,9 @@ class CalendarController extends Controller
             }
             
             Helpers::logAction('Evento de agenda atualizado', 'calendar', null, ['id' => $id]);
-            $this->jsonSuccess('Evento atualizado');
+            $this->success('Evento atualizado');
         } else {
-            $this->jsonError('Erro ao atualizar evento');
+            $this->error('Erro ao atualizar evento');
         }
     }
     
@@ -274,13 +275,13 @@ class CalendarController extends Controller
         $event = $this->calendarModel->find($id);
         
         if (!$event) {
-            $this->jsonError('Evento não encontrado', 404);
+            $this->error('Evento não encontrado', 404);
             return;
         }
         
         // Verifica permissão
         if ($event['user_id'] != Session::getUserId() && !Session::isAdmin()) {
-            $this->jsonError('Sem permissão', 403);
+            $this->error('Sem permissão', 403);
             return;
         }
         
@@ -292,9 +293,9 @@ class CalendarController extends Controller
             }
             
             Helpers::logAction('Evento de agenda cancelado', 'calendar', null, ['id' => $id]);
-            $this->jsonSuccess('Evento cancelado');
+            $this->success('Evento cancelado');
         } else {
-            $this->jsonError('Erro ao cancelar evento');
+            $this->error('Erro ao cancelar evento');
         }
     }
     
@@ -315,7 +316,7 @@ class CalendarController extends Controller
                     'data' => $event
                 ]);
             } else {
-                $this->jsonError('Agendamento não encontrado', 404);
+                $this->error('Agendamento não encontrado', 404);
             }
         } else {
             $event = $this->calendarModel->find($id);
@@ -326,7 +327,7 @@ class CalendarController extends Controller
                     'data' => $event
                 ]);
             } else {
-                $this->jsonError('Evento não encontrado', 404);
+                $this->error('Evento não encontrado', 404);
             }
         }
     }
@@ -438,7 +439,7 @@ class CalendarController extends Controller
         }
         
         if (!isset($_FILES['ics_file']) || $_FILES['ics_file']['error'] !== UPLOAD_ERR_OK) {
-            $this->jsonError('Arquivo não enviado ou erro no upload');
+            $this->error('Arquivo não enviado ou erro no upload');
             return;
         }
         
@@ -446,7 +447,7 @@ class CalendarController extends Controller
         $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
         
         if ($ext !== 'ics') {
-            $this->jsonError('Formato inválido. Use arquivo .ics');
+            $this->error('Formato inválido. Use arquivo .ics');
             return;
         }
         
@@ -454,7 +455,7 @@ class CalendarController extends Controller
         $events = $this->parseICS($content);
         
         if (empty($events)) {
-            $this->jsonError('Nenhum evento encontrado no arquivo');
+            $this->error('Nenhum evento encontrado no arquivo');
             return;
         }
         
@@ -469,7 +470,7 @@ class CalendarController extends Controller
             }
         }
         
-        $this->jsonSuccess("Importação concluída: {$imported} eventos importados, {$skipped} ignorados");
+        $this->success("Importação concluída: {$imported} eventos importados, {$skipped} ignorados");
     }
     
     // Exportar eventos para ICS

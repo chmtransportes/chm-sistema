@@ -170,9 +170,6 @@ $csrfToken = Session::getCsrfToken();
             <?php endif; ?>
 
             <div class="topbar-actions ms-auto d-flex align-items-center gap-2">
-                <a href="<?= APP_URL ?>bookings/create" class="btn btn-primary btn-sm d-none d-md-inline-flex">
-                    <i class="bi bi-plus-lg me-1"></i> Novo Agendamento
-                </a>
                 <a href="<?= APP_URL ?>logout" class="btn btn-outline-danger btn-sm d-none d-md-inline-flex" title="Sair do sistema">
                     <i class="bi bi-box-arrow-right me-1"></i> Sair
                 </a>

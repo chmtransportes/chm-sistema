@@ -86,6 +86,11 @@ use CHM\Core\Helpers;
                             <td><?= Helpers::statusLabel($driver['status']) ?></td>
                             <td>
                                 <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-outline-info" title="Visualizar" 
+                                            data-bs-toggle="modal" data-bs-target="#viewDriverModal"
+                                            onclick="loadDriverData(<?= $driver['id'] ?>)">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
                                     <a href="<?= APP_URL ?>drivers/<?= $driver['id'] ?>/edit" class="btn btn-outline-primary" title="Editar">
                                         <i class="bi bi-pencil"></i>
                                     </a>
@@ -121,7 +126,114 @@ use CHM\Core\Helpers;
     </div>
 </div>
 
+<!-- Modal Visualização Motorista -->
+<div class="modal fade" id="viewDriverModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title"><i class="bi bi-person-badge me-2"></i>Dados do Motorista</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="driverDetails">
+                <div class="text-center py-4">
+                    <div class="spinner-border text-info" role="status"></div>
+                    <p class="mt-2 text-muted">Carregando...</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <a href="#" id="btnEditDriver" class="btn btn-primary">
+                    <i class="bi bi-pencil me-1"></i>Editar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
+// Carrega dados do motorista para o modal
+async function loadDriverData(id) {
+    document.getElementById('driverDetails').innerHTML = `
+        <div class="text-center py-4">
+            <div class="spinner-border text-info" role="status"></div>
+            <p class="mt-2 text-muted">Carregando...</p>
+        </div>`;
+    document.getElementById('btnEditDriver').href = APP_URL + 'drivers/' + id + '/edit';
+    
+    try {
+        const response = await fetch(APP_URL + 'api/drivers/' + id, {
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        });
+        const result = await response.json();
+        
+        if (result.success) {
+            const d = result.data;
+            const typeLabel = d.type === 'proprio' ? 'Próprio' : 'Terceirizado';
+            const typeClass = d.type === 'proprio' ? 'primary' : 'secondary';
+            const statusClass = d.status === 'active' ? 'success' : 'secondary';
+            const statusLabel = d.status === 'active' ? 'Ativo' : 'Inativo';
+            
+            document.getElementById('driverDetails').innerHTML = `
+                <div class="text-center mb-3">
+                    <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width:80px;height:80px">
+                        <i class="bi bi-person-badge-fill text-info" style="font-size:2.5rem"></i>
+                    </div>
+                    <h5 class="mt-2 mb-0">${d.name}</h5>
+                    <div>
+                        <span class="badge bg-${typeClass} me-1">${typeLabel}</span>
+                        <span class="badge bg-${statusClass}">${statusLabel}</span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <small class="text-muted d-block">CPF</small>
+                        <strong>${d.document || '-'}</strong>
+                    </div>
+                    <div class="col-6">
+                        <small class="text-muted d-block">RG</small>
+                        <strong>${d.rg || '-'}</strong>
+                    </div>
+                    <div class="col-6">
+                        <small class="text-muted d-block">Celular/WhatsApp</small>
+                        <strong>${d.phone || '-'}</strong>
+                    </div>
+                    <div class="col-6">
+                        <small class="text-muted d-block">E-mail</small>
+                        <strong>${d.email || '-'}</strong>
+                    </div>
+                    <div class="col-6">
+                        <small class="text-muted d-block">CNH</small>
+                        <strong>${d.cnh || '-'} (${d.cnh_category || '-'})</strong>
+                    </div>
+                    <div class="col-6">
+                        <small class="text-muted d-block">Validade CNH</small>
+                        <strong>${d.cnh_expiry ? new Date(d.cnh_expiry).toLocaleDateString('pt-BR') : '-'}</strong>
+                    </div>
+                    <div class="col-6">
+                        <small class="text-muted d-block">Comissão</small>
+                        <strong>${d.commission ? d.commission + '%' : '-'}</strong>
+                    </div>
+                    <div class="col-6">
+                        <small class="text-muted d-block">PIX</small>
+                        <strong>${d.pix_key || '-'}</strong>
+                    </div>
+                    ${d.address ? `
+                    <div class="col-12">
+                        <small class="text-muted d-block">Endereço</small>
+                        <strong>${d.address}${d.number ? ', ' + d.number : ''}</strong>
+                        <br><small>${d.neighborhood || ''} - ${d.city || ''}/${d.state || ''}</small>
+                    </div>` : ''}
+                </div>
+            `;
+        } else {
+            document.getElementById('driverDetails').innerHTML = '<div class="alert alert-danger">Erro ao carregar dados</div>';
+        }
+    } catch (error) {
+        document.getElementById('driverDetails').innerHTML = '<div class="alert alert-danger">Erro de conexão</div>';
+    }
+}
+
 async function deleteDriver(id) {
     if (!confirm('Tem certeza que deseja excluir este motorista?')) return;
     

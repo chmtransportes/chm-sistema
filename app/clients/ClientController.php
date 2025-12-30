@@ -47,7 +47,7 @@ class ClientController extends Controller
     {
         $this->requireAuth();
         $this->setTitle('Novo Cliente');
-        $this->setData('nextClientNumber', 23787);
+        $this->setData('nextClientNumber', $this->model->getNextClientNumber());
         $this->view('clients.form');
     }
 
@@ -154,5 +154,19 @@ class ClientController extends Controller
         $this->requireAuth();
         $clients = $this->model->getForSelect();
         $this->json(['success' => true, 'data' => $clients]);
+    }
+
+    // API: Busca cliente por ID para visualização rápida
+    public function apiShow(string $id): void
+    {
+        $this->requireAuth();
+        $client = $this->model->find((int)$id);
+        
+        if (!$client) {
+            $this->error('Cliente não encontrado', 404);
+            return;
+        }
+        
+        $this->json(['success' => true, 'data' => $client]);
     }
 }

@@ -173,6 +173,7 @@ $router->get('/clients/{id}/edit', [\CHM\Clients\ClientController::class, 'edit'
 $router->put('/clients/{id}', [\CHM\Clients\ClientController::class, 'update'], ['auth']);
 $router->delete('/clients/{id}', [\CHM\Clients\ClientController::class, 'delete'], ['auth', 'admin']);
 $router->get('/api/clients', [\CHM\Clients\ClientController::class, 'apiList'], ['auth']);
+$router->get('/api/clients/{id}', [\CHM\Clients\ClientController::class, 'apiShow'], ['auth']);
 
 $router->get('/drivers', [\CHM\Drivers\DriverController::class, 'index'], ['auth']);
 $router->get('/drivers/create', [\CHM\Drivers\DriverController::class, 'create'], ['auth']);
@@ -183,6 +184,7 @@ $router->delete('/drivers/{id}', [\CHM\Drivers\DriverController::class, 'delete'
 $router->get('/drivers/{id}/closing', [\CHM\Drivers\DriverController::class, 'closing'], ['auth']);
 $router->get('/api/drivers', [\CHM\Drivers\DriverController::class, 'apiList'], ['auth']);
 $router->get('/api/drivers/available', [\CHM\Drivers\DriverController::class, 'apiAvailable'], ['auth']);
+$router->get('/api/drivers/{id}', [\CHM\Drivers\DriverController::class, 'apiShow'], ['auth']);
 
 $router->get('/vehicles', [\CHM\Vehicles\VehicleController::class, 'index'], ['auth']);
 $router->get('/vehicles/create', [\CHM\Vehicles\VehicleController::class, 'create'], ['auth']);
@@ -192,6 +194,7 @@ $router->put('/vehicles/{id}', [\CHM\Vehicles\VehicleController::class, 'update'
 $router->delete('/vehicles/{id}', [\CHM\Vehicles\VehicleController::class, 'delete'], ['auth', 'admin']);
 $router->get('/api/vehicles', [\CHM\Vehicles\VehicleController::class, 'apiList'], ['auth']);
 $router->get('/api/vehicles/available', [\CHM\Vehicles\VehicleController::class, 'apiAvailable'], ['auth']);
+$router->get('/api/vehicles/{id}', [\CHM\Vehicles\VehicleController::class, 'apiShow'], ['auth']);
 
 $router->get('/bookings', [\CHM\Bookings\BookingController::class, 'index'], ['auth']);
 $router->get('/bookings/', [\CHM\Bookings\BookingController::class, 'index'], ['auth']);

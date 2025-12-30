@@ -95,9 +95,11 @@ abstract class Controller
         if (!Session::isAuthenticated()) {
             if ($this->isAjax()) {
                 $this->error('Não autorizado', 401);
+                exit;
             }
             Session::flash('error', 'Faça login para continuar.');
             $this->redirect(APP_URL . 'login');
+            exit;
         }
     }
 
@@ -107,15 +109,21 @@ abstract class Controller
         if (!Session::isAdmin()) {
             if ($this->isAjax()) {
                 $this->error('Acesso negado', 403);
+                exit;
             }
             Session::flash('error', 'Acesso restrito a administradores.');
             $this->redirect(APP_URL . 'dashboard');
+            exit;
         }
     }
 
     protected function isAjax(): bool
     {
-        return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+        // Detecta XMLHttpRequest, fetch() com Accept JSON, ou rotas /api/
+        return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
+            || (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false)
+            || (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/api/') !== false)
+            || (isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false);
     }
 
     protected function isMethod(string $method): bool

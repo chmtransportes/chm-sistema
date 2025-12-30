@@ -40,20 +40,48 @@ $csrfToken = Session::getCsrfToken();
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">Marca *</label>
-                                <input type="text" name="brand" class="form-control" required value="<?= htmlspecialchars($vehicle['brand'] ?? '') ?>" list="brands">
-                                <datalist id="brands">
-                                    <option value="Chevrolet">
-                                    <option value="Fiat">
-                                    <option value="Ford">
-                                    <option value="Honda">
-                                    <option value="Hyundai">
-                                    <option value="Jeep">
-                                    <option value="Mercedes-Benz">
-                                    <option value="Nissan">
-                                    <option value="Renault">
-                                    <option value="Toyota">
-                                    <option value="Volkswagen">
-                                </datalist>
+                                <select name="brand" class="form-select" required>
+                                    <option value="">Selecione a marca</option>
+                                    <option value="Agrale" <?= ($vehicle['brand'] ?? '') === 'Agrale' ? 'selected' : '' ?>>Agrale</option>
+                                    <option value="Alfa Romeo" <?= ($vehicle['brand'] ?? '') === 'Alfa Romeo' ? 'selected' : '' ?>>Alfa Romeo</option>
+                                    <option value="Audi" <?= ($vehicle['brand'] ?? '') === 'Audi' ? 'selected' : '' ?>>Audi</option>
+                                    <option value="BMW" <?= ($vehicle['brand'] ?? '') === 'BMW' ? 'selected' : '' ?>>BMW</option>
+                                    <option value="BYD" <?= ($vehicle['brand'] ?? '') === 'BYD' ? 'selected' : '' ?>>BYD</option>
+                                    <option value="Caoa Chery" <?= ($vehicle['brand'] ?? '') === 'Caoa Chery' ? 'selected' : '' ?>>Caoa Chery</option>
+                                    <option value="Chevrolet" <?= ($vehicle['brand'] ?? '') === 'Chevrolet' ? 'selected' : '' ?>>Chevrolet</option>
+                                    <option value="Chrysler" <?= ($vehicle['brand'] ?? '') === 'Chrysler' ? 'selected' : '' ?>>Chrysler</option>
+                                    <option value="Citroën" <?= ($vehicle['brand'] ?? '') === 'Citroën' ? 'selected' : '' ?>>Citroën</option>
+                                    <option value="Dodge" <?= ($vehicle['brand'] ?? '') === 'Dodge' ? 'selected' : '' ?>>Dodge</option>
+                                    <option value="Ferrari" <?= ($vehicle['brand'] ?? '') === 'Ferrari' ? 'selected' : '' ?>>Ferrari</option>
+                                    <option value="Fiat" <?= ($vehicle['brand'] ?? '') === 'Fiat' ? 'selected' : '' ?>>Fiat</option>
+                                    <option value="Ford" <?= ($vehicle['brand'] ?? '') === 'Ford' ? 'selected' : '' ?>>Ford</option>
+                                    <option value="GWM" <?= ($vehicle['brand'] ?? '') === 'GWM' ? 'selected' : '' ?>>GWM</option>
+                                    <option value="Honda" <?= ($vehicle['brand'] ?? '') === 'Honda' ? 'selected' : '' ?>>Honda</option>
+                                    <option value="Hyundai" <?= ($vehicle['brand'] ?? '') === 'Hyundai' ? 'selected' : '' ?>>Hyundai</option>
+                                    <option value="Iveco" <?= ($vehicle['brand'] ?? '') === 'Iveco' ? 'selected' : '' ?>>Iveco</option>
+                                    <option value="Jaguar" <?= ($vehicle['brand'] ?? '') === 'Jaguar' ? 'selected' : '' ?>>Jaguar</option>
+                                    <option value="Jeep" <?= ($vehicle['brand'] ?? '') === 'Jeep' ? 'selected' : '' ?>>Jeep</option>
+                                    <option value="Kia" <?= ($vehicle['brand'] ?? '') === 'Kia' ? 'selected' : '' ?>>Kia</option>
+                                    <option value="Lamborghini" <?= ($vehicle['brand'] ?? '') === 'Lamborghini' ? 'selected' : '' ?>>Lamborghini</option>
+                                    <option value="Land Rover" <?= ($vehicle['brand'] ?? '') === 'Land Rover' ? 'selected' : '' ?>>Land Rover</option>
+                                    <option value="Lexus" <?= ($vehicle['brand'] ?? '') === 'Lexus' ? 'selected' : '' ?>>Lexus</option>
+                                    <option value="Maserati" <?= ($vehicle['brand'] ?? '') === 'Maserati' ? 'selected' : '' ?>>Maserati</option>
+                                    <option value="Mercedes-Benz" <?= ($vehicle['brand'] ?? '') === 'Mercedes-Benz' ? 'selected' : '' ?>>Mercedes-Benz</option>
+                                    <option value="Mini" <?= ($vehicle['brand'] ?? '') === 'Mini' ? 'selected' : '' ?>>Mini</option>
+                                    <option value="Mitsubishi" <?= ($vehicle['brand'] ?? '') === 'Mitsubishi' ? 'selected' : '' ?>>Mitsubishi</option>
+                                    <option value="Nissan" <?= ($vehicle['brand'] ?? '') === 'Nissan' ? 'selected' : '' ?>>Nissan</option>
+                                    <option value="Peugeot" <?= ($vehicle['brand'] ?? '') === 'Peugeot' ? 'selected' : '' ?>>Peugeot</option>
+                                    <option value="Porsche" <?= ($vehicle['brand'] ?? '') === 'Porsche' ? 'selected' : '' ?>>Porsche</option>
+                                    <option value="RAM" <?= ($vehicle['brand'] ?? '') === 'RAM' ? 'selected' : '' ?>>RAM</option>
+                                    <option value="Renault" <?= ($vehicle['brand'] ?? '') === 'Renault' ? 'selected' : '' ?>>Renault</option>
+                                    <option value="Rolls-Royce" <?= ($vehicle['brand'] ?? '') === 'Rolls-Royce' ? 'selected' : '' ?>>Rolls-Royce</option>
+                                    <option value="Scania" <?= ($vehicle['brand'] ?? '') === 'Scania' ? 'selected' : '' ?>>Scania</option>
+                                    <option value="Subaru" <?= ($vehicle['brand'] ?? '') === 'Subaru' ? 'selected' : '' ?>>Subaru</option>
+                                    <option value="Suzuki" <?= ($vehicle['brand'] ?? '') === 'Suzuki' ? 'selected' : '' ?>>Suzuki</option>
+                                    <option value="Toyota" <?= ($vehicle['brand'] ?? '') === 'Toyota' ? 'selected' : '' ?>>Toyota</option>
+                                    <option value="Volkswagen" <?= ($vehicle['brand'] ?? '') === 'Volkswagen' ? 'selected' : '' ?>>Volkswagen</option>
+                                    <option value="Volvo" <?= ($vehicle['brand'] ?? '') === 'Volvo' ? 'selected' : '' ?>>Volvo</option>
+                                </select>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">Modelo *</label>

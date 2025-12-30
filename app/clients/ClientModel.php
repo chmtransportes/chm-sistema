@@ -24,7 +24,7 @@ class ClientModel extends Model
     {
         try {
             $sql = "SELECT MAX(CAST(client_number AS UNSIGNED)) as max_num FROM {$this->getTable()} WHERE client_number IS NOT NULL";
-            $result = $this->db->fetch($sql);
+            $result = $this->db->fetchOne($sql);
             $maxNum = (int)($result['max_num'] ?? 0);
             return max($maxNum + 1, 23780);
         } catch (\Exception $e) {

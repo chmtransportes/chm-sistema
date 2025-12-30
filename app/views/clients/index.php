@@ -90,6 +90,11 @@ use CHM\Core\Helpers;
                             </td>
                             <td>
                                 <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-outline-info" title="Visualizar" 
+                                            data-bs-toggle="modal" data-bs-target="#viewClientModal"
+                                            onclick="loadClientData(<?= $client['id'] ?>)">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
                                     <a href="<?= APP_URL ?>clients/<?= $client['id'] ?>/edit" class="btn btn-outline-primary" title="Editar">
                                         <i class="bi bi-pencil"></i>
                                     </a>
@@ -123,7 +128,100 @@ use CHM\Core\Helpers;
     </div>
 </div>
 
+<!-- Modal Visualização Cliente -->
+<div class="modal fade" id="viewClientModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title"><i class="bi bi-person-circle me-2"></i>Dados do Cliente</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="clientDetails">
+                <div class="text-center py-4">
+                    <div class="spinner-border text-info" role="status"></div>
+                    <p class="mt-2 text-muted">Carregando...</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <a href="#" id="btnEditClient" class="btn btn-primary">
+                    <i class="bi bi-pencil me-1"></i>Editar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
+// Carrega dados do cliente para o modal
+async function loadClientData(id) {
+    document.getElementById('clientDetails').innerHTML = `
+        <div class="text-center py-4">
+            <div class="spinner-border text-info" role="status"></div>
+            <p class="mt-2 text-muted">Carregando...</p>
+        </div>`;
+    document.getElementById('btnEditClient').href = APP_URL + 'clients/' + id + '/edit';
+    
+    try {
+        const response = await fetch(APP_URL + 'api/clients/' + id, {
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        });
+        const result = await response.json();
+        
+        if (result.success) {
+            const c = result.data;
+            const typeLabel = c.type === 'pf' ? 'Pessoa Física' : 'Pessoa Jurídica';
+            const statusClass = c.status === 'active' ? 'success' : 'secondary';
+            const statusLabel = c.status === 'active' ? 'Ativo' : 'Inativo';
+            
+            document.getElementById('clientDetails').innerHTML = `
+                <div class="text-center mb-3">
+                    <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width:80px;height:80px">
+                        <i class="bi bi-person-fill text-info" style="font-size:2.5rem"></i>
+                    </div>
+                    <h5 class="mt-2 mb-0">${c.name}</h5>
+                    ${c.trade_name ? '<small class="text-muted">' + c.trade_name + '</small>' : ''}
+                    <div><span class="badge bg-${statusClass}">${statusLabel}</span></div>
+                </div>
+                <hr>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <small class="text-muted d-block">Tipo</small>
+                        <strong>${typeLabel}</strong>
+                    </div>
+                    <div class="col-6">
+                        <small class="text-muted d-block">${c.type === 'pf' ? 'CPF' : 'CNPJ'}</small>
+                        <strong>${c.document || '-'}</strong>
+                    </div>
+                    <div class="col-6">
+                        <small class="text-muted d-block">Celular/WhatsApp</small>
+                        <strong>${c.phone || '-'}</strong>
+                    </div>
+                    <div class="col-6">
+                        <small class="text-muted d-block">E-mail</small>
+                        <strong>${c.email || '-'}</strong>
+                    </div>
+                    ${c.address ? `
+                    <div class="col-12">
+                        <small class="text-muted d-block">Endereço</small>
+                        <strong>${c.address}${c.number ? ', ' + c.number : ''}${c.complement ? ' - ' + c.complement : ''}</strong>
+                        <br><small>${c.neighborhood || ''} - ${c.city || ''}/${c.state || ''} - CEP: ${c.zipcode || ''}</small>
+                    </div>` : ''}
+                    ${c.notes ? `
+                    <div class="col-12">
+                        <small class="text-muted d-block">Observações</small>
+                        <strong>${c.notes}</strong>
+                    </div>` : ''}
+                </div>
+            `;
+        } else {
+            document.getElementById('clientDetails').innerHTML = '<div class="alert alert-danger">Erro ao carregar dados</div>';
+        }
+    } catch (error) {
+        document.getElementById('clientDetails').innerHTML = '<div class="alert alert-danger">Erro de conexão</div>';
+    }
+}
+
 async function deleteClient(id) {
     if (!confirm('Tem certeza que deseja excluir este cliente?')) return;
     

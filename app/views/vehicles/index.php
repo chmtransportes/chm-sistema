@@ -80,6 +80,11 @@ use CHM\Core\Helpers;
                             </td>
                             <td>
                                 <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-outline-info" title="Visualizar" 
+                                            data-bs-toggle="modal" data-bs-target="#viewVehicleModal"
+                                            onclick="loadVehicleData(<?= $vehicle['id'] ?>)">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
                                     <a href="<?= APP_URL ?>vehicles/<?= $vehicle['id'] ?>/edit" class="btn btn-outline-primary" title="Editar">
                                         <i class="bi bi-pencil"></i>
                                     </a>
@@ -112,7 +117,124 @@ use CHM\Core\Helpers;
     </div>
 </div>
 
+<!-- Modal Visualização Veículo -->
+<div class="modal fade" id="viewVehicleModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title"><i class="bi bi-car-front me-2"></i>Dados do Veículo</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="vehicleDetails">
+                <div class="text-center py-4">
+                    <div class="spinner-border text-info" role="status"></div>
+                    <p class="mt-2 text-muted">Carregando...</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <a href="#" id="btnEditVehicle" class="btn btn-primary">
+                    <i class="bi bi-pencil me-1"></i>Editar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
+// Carrega dados do veículo para o modal
+async function loadVehicleData(id) {
+    document.getElementById('vehicleDetails').innerHTML = `
+        <div class="text-center py-4">
+            <div class="spinner-border text-info" role="status"></div>
+            <p class="mt-2 text-muted">Carregando...</p>
+        </div>`;
+    document.getElementById('btnEditVehicle').href = APP_URL + 'vehicles/' + id + '/edit';
+    
+    try {
+        const response = await fetch(APP_URL + 'api/vehicles/' + id, {
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        });
+        const result = await response.json();
+        
+        if (result.success) {
+            const v = result.data;
+            const ownerLabel = v.owner === 'proprio' ? 'Próprio' : 'Terceirizado';
+            const ownerClass = v.owner === 'proprio' ? 'primary' : 'secondary';
+            const statusLabels = { active: 'Ativo', inactive: 'Inativo', maintenance: 'Manutenção' };
+            const statusClasses = { active: 'success', inactive: 'secondary', maintenance: 'warning' };
+            const categories = { sedan: 'Sedan', suv: 'SUV', van: 'Van', bus: 'Ônibus', other: 'Outro' };
+            
+            document.getElementById('vehicleDetails').innerHTML = `
+                <div class="text-center mb-3">
+                    <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width:80px;height:80px">
+                        <i class="bi bi-car-front-fill text-info" style="font-size:2.5rem"></i>
+                    </div>
+                    <h5 class="mt-2 mb-0">${v.brand} ${v.model}</h5>
+                    <h6 class="text-primary">${v.plate}</h6>
+                    <div>
+                        <span class="badge bg-${ownerClass} me-1">${ownerLabel}</span>
+                        <span class="badge bg-${statusClasses[v.status] || 'secondary'}">${statusLabels[v.status] || v.status}</span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <small class="text-muted d-block">Placa</small>
+                        <strong>${v.plate || '-'}</strong>
+                    </div>
+                    <div class="col-6">
+                        <small class="text-muted d-block">Marca</small>
+                        <strong>${v.brand || '-'}</strong>
+                    </div>
+                    <div class="col-6">
+                        <small class="text-muted d-block">Modelo</small>
+                        <strong>${v.model || '-'}</strong>
+                    </div>
+                    <div class="col-6">
+                        <small class="text-muted d-block">Ano</small>
+                        <strong>${v.year || '-'}</strong>
+                    </div>
+                    <div class="col-4">
+                        <small class="text-muted d-block">Cor</small>
+                        <strong>${v.color || '-'}</strong>
+                    </div>
+                    <div class="col-4">
+                        <small class="text-muted d-block">Categoria</small>
+                        <strong>${categories[v.category] || v.category || '-'}</strong>
+                    </div>
+                    <div class="col-4">
+                        <small class="text-muted d-block">Lugares</small>
+                        <strong>${v.seats ? v.seats + ' passageiros' : '-'}</strong>
+                    </div>
+                    <div class="col-6">
+                        <small class="text-muted d-block">Combustível</small>
+                        <strong>${v.fuel || '-'}</strong>
+                    </div>
+                    <div class="col-6">
+                        <small class="text-muted d-block">Tipo</small>
+                        <strong>${v.ownership === 'proprio' ? 'Próprio' : v.ownership === 'alugado' ? 'Alugado' : '-'}</strong>
+                    </div>
+                    ${v.chassis ? `
+                    <div class="col-12">
+                        <small class="text-muted d-block">Chassi</small>
+                        <strong>${v.chassis}</strong>
+                    </div>` : ''}
+                    ${v.notes ? `
+                    <div class="col-12">
+                        <small class="text-muted d-block">Observações</small>
+                        <strong>${v.notes}</strong>
+                    </div>` : ''}
+                </div>
+            `;
+        } else {
+            document.getElementById('vehicleDetails').innerHTML = '<div class="alert alert-danger">Erro ao carregar dados</div>';
+        }
+    } catch (error) {
+        document.getElementById('vehicleDetails').innerHTML = '<div class="alert alert-danger">Erro de conexão</div>';
+    }
+}
+
 async function deleteVehicle(id) {
     if (!confirm('Tem certeza que deseja excluir este veículo?')) return;
     

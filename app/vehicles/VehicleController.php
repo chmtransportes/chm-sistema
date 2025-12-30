@@ -149,6 +149,20 @@ class VehicleController extends Controller
         $this->json(['success' => true, 'data' => $vehicles]);
     }
 
+    // API: Busca veículo por ID para visualização rápida
+    public function apiShow(string $id): void
+    {
+        $this->requireAuth();
+        $vehicle = $this->model->find((int)$id);
+        
+        if (!$vehicle) {
+            $this->error('Veículo não encontrado', 404);
+            return;
+        }
+        
+        $this->json(['success' => true, 'data' => $vehicle]);
+    }
+
     // Upload de foto
     private function uploadPhoto(array $file): ?string
     {

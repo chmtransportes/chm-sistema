@@ -35,25 +35,17 @@ $csrfToken = Session::getCsrfToken();
                     <div class="card-header"><i class="bi bi-person me-2"></i>Dados Pessoais</div>
                     <div class="card-body">
                         <div class="row g-3">
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <label class="form-label">Nome Completo *</label>
                                 <input type="text" name="name" class="form-control" required value="<?= htmlspecialchars($driver['name'] ?? '') ?>">
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label">Número</label>
-                                <input type="text" name="driver_number" class="form-control" value="<?= htmlspecialchars($driver['driver_number'] ?? $nextDriverNumber) ?>" readonly style="background-color: #e9ecef;">
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">CPF *</label>
                                 <input type="text" name="document" class="form-control" data-mask="cpf" required value="<?= htmlspecialchars($driver['document'] ?? '') ?>">
                             </div>
-                            <div class="col-md-4">
-                                <label class="form-label">RG</label>
-                                <input type="text" name="rg" class="form-control" value="<?= htmlspecialchars($driver['rg'] ?? '') ?>">
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label">Data de Nascimento</label>
-                                <input type="date" name="birth_date" class="form-control" value="<?= $driver['birth_date'] ?? '' ?>">
+                            <div class="col-md-2">
+                                <label class="form-label">Número</label>
+                                <input type="text" name="driver_number" class="form-control bg-white" value="<?= htmlspecialchars($driver['driver_number'] ?? $nextDriverNumber) ?>" readonly>
                             </div>
                         </div>
                     </div>
@@ -93,54 +85,13 @@ $csrfToken = Session::getCsrfToken();
                     <div class="card-header"><i class="bi bi-telephone me-2"></i>Contato</div>
                     <div class="card-body">
                         <div class="row g-3">
-                            <div class="col-md-4">
-                                <label class="form-label">Celular/WhatsApp 1</label>
+                            <div class="col-md-6">
+                                <label class="form-label">Celular/WhatsApp</label>
                                 <input type="text" name="phone" class="form-control" data-mask="phone" value="<?= htmlspecialchars($driver['phone'] ?? '') ?>">
                             </div>
-                            <div class="col-md-4">
-                                <label class="form-label">Celular/WhatsApp 2</label>
-                                <input type="text" name="whatsapp" class="form-control" data-mask="phone" value="<?= htmlspecialchars($driver['whatsapp'] ?? '') ?>">
-                            </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label class="form-label">E-mail</label>
                                 <input type="email" name="email" class="form-control" value="<?= htmlspecialchars($driver['email'] ?? '') ?>">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Endereço -->
-                <div class="card mb-3">
-                    <div class="card-header"><i class="bi bi-geo-alt me-2"></i>Endereço</div>
-                    <div class="card-body">
-                        <div class="row g-3">
-                            <div class="col-md-3">
-                                <label class="form-label">CEP</label>
-                                <input type="text" name="zipcode" class="form-control" data-mask="cep" data-cep-search value="<?= htmlspecialchars($driver['zipcode'] ?? '') ?>">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Endereço</label>
-                                <input type="text" name="address" class="form-control" value="<?= htmlspecialchars($driver['address'] ?? '') ?>">
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label">Nº</label>
-                                <input type="text" name="address_number" class="form-control" value="<?= htmlspecialchars($driver['address_number'] ?? '') ?>">
-                            </div>
-                            <div class="col-12">
-                                <div class="address-row">
-                                    <div class="field-bairro">
-                                        <label class="form-label">Bairro</label>
-                                        <input type="text" name="neighborhood" class="form-control" value="<?= htmlspecialchars($driver['neighborhood'] ?? '') ?>">
-                                    </div>
-                                    <div class="field-cidade">
-                                        <label class="form-label">Cidade</label>
-                                        <input type="text" name="city" class="form-control" value="<?= htmlspecialchars($driver['city'] ?? '') ?>">
-                                    </div>
-                                    <div class="field-uf">
-                                        <label class="form-label">UF</label>
-                                        <input type="text" name="state" class="form-control" maxlength="2" value="<?= htmlspecialchars($driver['state'] ?? '') ?>">
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -187,15 +138,6 @@ $csrfToken = Session::getCsrfToken();
                             <small class="text-muted">Foto 3x4 ou similar</small>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Foto do Carro (Frente com Placa)</label>
-                            <div class="preview-container mb-2 <?= empty($driver['car_photo']) ? 'd-none' : '' ?>" id="containerCarPhoto">
-                                <img id="previewCarPhoto" src="<?= !empty($driver['car_photo']) ? APP_URL . 'uploads/drivers/' . $driver['car_photo'] : '' ?>" class="img-thumbnail" style="max-height: 100px;">
-                                <button type="button" class="btn-remove" onclick="removeImage('CarPhoto')" title="Remover foto">&times;</button>
-                            </div>
-                            <input type="file" name="car_photo" id="inputCarPhoto" class="form-control" accept="image/*" onchange="previewImage(this, 'CarPhoto')">
-                            <small class="text-muted">Foto frontal mostrando a placa</small>
-                        </div>
-                        <div class="mb-3">
                             <label class="form-label">Foto da CNH</label>
                             <div class="preview-container mb-2 <?= empty($driver['cnh_photo']) ? 'd-none' : '' ?>" id="containerCnhPhoto">
                                 <img id="previewCnhPhoto" src="<?= !empty($driver['cnh_photo']) ? APP_URL . 'uploads/drivers/' . $driver['cnh_photo'] : '' ?>" class="img-thumbnail" style="max-height: 100px;">
@@ -207,16 +149,7 @@ $csrfToken = Session::getCsrfToken();
                     </div>
                 </div>
 
-                <!-- Status -->
-                <div class="card mb-3">
-                    <div class="card-header"><i class="bi bi-toggle-on me-2"></i>Status</div>
-                    <div class="card-body">
-                        <select name="status" class="form-select">
-                            <option value="active" <?= ($driver['status'] ?? 'active') === 'active' ? 'selected' : '' ?>>Ativo</option>
-                            <option value="inactive" <?= ($driver['status'] ?? '') === 'inactive' ? 'selected' : '' ?>>Inativo</option>
-                        </select>
-                    </div>
-                </div>
+                <input type="hidden" name="status" value="active">
 
                 <!-- Observações -->
                 <div class="card mb-3">
