@@ -756,11 +756,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 12px;
-    gap: 10px;
-    height: 56px;
-    min-height: 56px;
-    max-height: 56px;
+    padding: 10px 12px;
+    gap: 12px;
+    height: 64px;
+    min-height: 64px;
+    max-height: 64px;
     background: #fff;
     border-bottom: 1px solid #e9ecef;
     position: sticky;
@@ -768,21 +768,23 @@ body {
     z-index: 100;
 }
 
-/* Logo Mobile - Centralizado */
-.topbar-brand-mobile {
+/* Logo ESQUERDA - Tamanho grande igual stat-icon */
+.topbar-logo {
     display: flex;
     align-items: center;
-    flex: 1;
-    justify-content: center;
-    overflow: hidden;
+    flex-shrink: 0;
 }
 
-.topbar-brand-mobile img {
-    height: 38px !important;
+.topbar-logo img {
+    height: 48px !important;
     width: auto !important;
-    max-width: 100px !important;
-    max-height: 38px !important;
+    max-height: 48px !important;
     object-fit: contain !important;
+}
+
+/* Spacer para empurrar hamburger para direita */
+.topbar-spacer {
+    flex: 1;
 }
 
 /* Hamburger - Direita no Mobile */

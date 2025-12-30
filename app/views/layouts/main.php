@@ -151,11 +151,12 @@ $csrfToken = Session::getCsrfToken();
     <main id="main-content" class="main-content">
         <!-- Top Bar Mobile-First -->
         <header class="topbar">
-            <!-- Logo centralizado no mobile -->
-            <a href="<?= APP_URL ?>dashboard" class="topbar-brand-mobile">
-                <img src="<?= ASSETS_URL ?>img/logo-chm.png" alt="CHM" style="height: 38px !important; width: auto !important; max-width: 100px !important; object-fit: contain;">
+            <!-- ESQUERDA: Logo grande -->
+            <a href="<?= APP_URL ?>dashboard" class="topbar-logo">
+                <img src="<?= ASSETS_URL ?>img/logo-chm.png" alt="CHM">
             </a>
 
+            <!-- CENTRO: Breadcrumb (desktop) -->
             <?php if (isset($breadcrumb) && is_array($breadcrumb)): ?>
             <nav aria-label="breadcrumb" class="breadcrumb-desktop">
                 <ol class="breadcrumb mb-0">
@@ -170,7 +171,10 @@ $csrfToken = Session::getCsrfToken();
             </nav>
             <?php endif; ?>
 
-            <!-- Hamburger à direita no mobile -->
+            <!-- Spacer para empurrar hamburger para direita -->
+            <div class="topbar-spacer"></div>
+
+            <!-- DIREITA: Hamburger (mobile) -->
             <button class="btn-hamburger" onclick="toggleSidebar()" aria-label="Menu">
                 <i class="bi bi-list"></i>
             </button>
