@@ -35,7 +35,7 @@ if (file_exists($envLoaderPath)) {
 }
 
 // Versão do sistema
-define('CHM_VERSION', '2.5.0');
+define('CHM_VERSION', '2.6.1');
 define('CHM_VERSION_DATE', '2025-12-29');
 
 // Ambiente (production ou development)

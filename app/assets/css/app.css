@@ -76,8 +76,8 @@ body {
 }
 
 .sidebar-logo {
-    max-width: 180px;
-    height: 72px;
+    max-width: 120px;
+    height: 50px;
     object-fit: contain;
 }
 
@@ -355,6 +355,11 @@ body {
     .sidebar {
         transform: translateX(-100%);
         box-shadow: 4px 0 25px rgba(0,0,0,0.3);
+        visibility: hidden;
+    }
+    
+    body.sidebar-open .sidebar {
+        visibility: visible;
     }
 
     .main-content {
