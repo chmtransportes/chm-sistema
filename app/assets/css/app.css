@@ -756,7 +756,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 12px 16px;
-    height: 96px;
+    height: 112px;
     background: #fff;
     border-bottom: 1px solid #ddd;
     position: fixed;
@@ -775,9 +775,9 @@ body {
 }
 
 .mobile-logo img {
-    height: 76px;
+    height: 92px;
     width: auto;
-    max-width: 174px;
+    max-width: 211px;
     object-fit: contain;
 }
 
@@ -840,7 +840,7 @@ body {
 
 /* Main content - compensar header fixo */
 .main-content {
-    padding-top: 104px;
+    padding-top: 120px;
 }
 
 /* Page content mobile - BRANCO LIMPO */
