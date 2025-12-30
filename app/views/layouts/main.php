@@ -210,6 +210,10 @@ $csrfToken = Session::getCsrfToken();
             <?= $content ?>
         </div>
         
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>&copy; 2006 - <?= date('Y') ?> CHM-SISTEMA-APP</p>
+        </footer>
     </main>
 
     <!-- Overlay for mobile sidebar -->

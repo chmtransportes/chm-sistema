@@ -918,3 +918,28 @@ body {
 .sidebar-header .sidebar-toggle:hover {
     background: rgba(255,255,255,0.1);
 }
+
+/* App Footer - Todas as telas */
+.app-footer {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: rgba(255,255,255,0.9);
+    text-align: center;
+    padding: 20px 16px;
+    margin-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.app-footer p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 991.98px) {
+    .app-footer {
+        padding: 16px 12px;
+        margin-top: 24px;
+        font-size: 13px;
+    }
+}
