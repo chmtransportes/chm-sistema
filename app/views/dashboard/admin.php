@@ -101,7 +101,7 @@ use CHM\Core\Helpers;
         </div>
     </div>
 
-    <div class="row g-3">
+    <div class="row g-3 hide-on-mobile">
         <!-- Próximos Agendamentos -->
         <div class="col-lg-8">
             <div class="card">

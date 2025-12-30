@@ -850,6 +850,10 @@ body {
         min-height: calc(100vh - 56px);
         padding: 0 !important;
     }
+    
+    .hide-on-mobile {
+        display: none !important;
+    }
 }
 
 /* === DESKTOP (992px+) - INALTERADO === */
