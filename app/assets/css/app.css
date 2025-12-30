@@ -863,18 +863,24 @@ body {
         display: none !important;
     }
     
-    /* Título Dashboard centralizado */
+    /* Título Dashboard e data lado a lado */
     .container-fluid > .d-flex.justify-content-between {
-        justify-content: center !important;
-        flex-direction: column;
+        justify-content: space-between !important;
+        flex-direction: row;
         align-items: center;
-        padding-top: 16px;
-        gap: 8px;
+        padding: 12px 0;
     }
     
     .container-fluid > .d-flex.justify-content-between h4 {
-        font-size: 1.5rem;
-        font-weight: 600;
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: #6c757d;
+        margin: 0;
+    }
+    
+    .container-fluid > .d-flex.justify-content-between .text-muted {
+        color: #6c757d !important;
+        font-size: 0.9rem;
     }
 }
 
