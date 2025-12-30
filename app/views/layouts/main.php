@@ -151,9 +151,9 @@ $csrfToken = Session::getCsrfToken();
     <main id="main-content" class="main-content">
         <!-- Top Bar Mobile-First -->
         <header class="topbar">
-            <!-- ESQUERDA: Logo grande -->
-            <a href="<?= APP_URL ?>dashboard" class="topbar-logo">
-                <img src="<?= ASSETS_URL ?>img/logo-chm.png" alt="CHM">
+            <!-- ESQUERDA: Logo com tamanho controlado -->
+            <a href="<?= APP_URL ?>dashboard" class="topbar-logo-box">
+                <span class="logo-icon">CHM</span>
             </a>
 
             <!-- CENTRO: Breadcrumb (desktop) -->

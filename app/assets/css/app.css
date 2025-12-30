@@ -768,18 +768,27 @@ body {
     z-index: 100;
 }
 
-/* Logo ESQUERDA - Tamanho grande igual stat-icon */
-.topbar-logo {
+/* Logo Box - Tamanho controlado */
+.topbar-logo-box {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-shrink: 0;
+    text-decoration: none;
 }
 
-.topbar-logo img {
-    height: 48px !important;
-    width: auto !important;
-    max-height: 48px !important;
-    object-fit: contain !important;
+.logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    border-radius: 12px;
+    letter-spacing: -0.5px;
 }
 
 /* Spacer para empurrar hamburger para direita */
@@ -867,12 +876,14 @@ body {
         display: none !important;
     }
     
-    .topbar-logo {
+    .topbar-logo-box {
         flex: 0;
     }
     
-    .topbar-logo img {
-        height: 36px !important;
+    .logo-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 11px;
     }
     
     .topbar-spacer {
