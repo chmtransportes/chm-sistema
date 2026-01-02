@@ -172,7 +172,18 @@ body {
     flex-direction: column;
 }
 
-/* Topbar - regras centralizadas na seção TOP HEADER */
+.topbar {
+    height: var(--topbar-height);
+    background: #fff;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+}
 
 .topbar-actions {
     display: flex;
@@ -387,6 +398,12 @@ body {
         padding: 15px 20px;
     }
     
+    /* Topbar Mobile */
+    .topbar {
+        padding: 8px 12px;
+        gap: 8px;
+    }
+
     .page-content {
         padding: 15px;
     }
@@ -731,40 +748,29 @@ body {
 }
 
 /* ============================================
-   TOP HEADER - CONTROLE CENTRALIZADO
-   Tamanhos: Desktop 200px, Tablet 160px, Mobile 120px
+   MOBILE-FIRST BASE SCREEN
    @author ch-mestriner (https://ch-mestriner.com.br)
-   @date 02/01/2026
+   @date 29/12/2025
    ============================================ */
 
-/* Variáveis do Header (ÚNICO LUGAR PARA ALTERAR TAMANHOS) */
-:root {
-    --header-logo-desktop: 200px;
-    --header-logo-tablet: 160px;
-    --header-logo-mobile: 120px;
-    --header-height-desktop: 60px;
-    --header-height-tablet: 70px;
-    --header-height-mobile: 70px;
-}
-
-/* Topbar Base */
+/* === TOPBAR MOBILE (default) === */
 .topbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 16px;
-    height: var(--header-height-mobile);
+    padding: 12px 16px;
+    height: 128px;
     background: #fff;
-    border-bottom: 1px solid #e9ecef;
+    border-bottom: 1px solid #ddd;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
-/* Logo no Header - Base */
+/* Logo Mobile - Esquerda */
 .mobile-logo {
     display: flex;
     align-items: center;
@@ -772,8 +778,9 @@ body {
 }
 
 .mobile-logo img {
-    width: var(--header-logo-mobile);
-    height: auto;
+    height: 92px;
+    width: auto;
+    max-width: 211px;
     object-fit: contain;
 }
 
@@ -788,12 +795,12 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
-    padding: 8px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
     background: transparent;
     border: 2px solid var(--primary);
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     gap: 4px;
     flex-shrink: 0;
@@ -801,7 +808,7 @@ body {
 
 .mobile-hamburger span {
     display: block;
-    width: 18px;
+    width: 20px;
     height: 2px;
     background: var(--primary);
     border-radius: 2px;
@@ -836,7 +843,7 @@ body {
 
 /* Main content - compensar header fixo */
 .main-content {
-    padding-top: calc(var(--header-height-mobile) + 8px);
+    padding-top: 136px;
 }
 
 /* Page content mobile - BRANCO LIMPO */
@@ -877,36 +884,15 @@ body {
     }
 }
 
-/* === TABLET (768px - 991px) === */
-@media (min-width: 768px) and (max-width: 991.98px) {
-    .topbar {
-        height: var(--header-height-tablet);
-    }
-    
-    .mobile-logo img {
-        width: var(--header-logo-tablet);
-    }
-    
-    .main-content {
-        padding-top: calc(var(--header-height-tablet) + 8px);
-    }
-}
-
 /* === DESKTOP (992px+) === */
 @media (min-width: 992px) {
-    .topbar {
-        position: sticky;
-        top: 0;
-        height: var(--header-height-desktop);
-        padding: 0 20px;
+    .mobile-hamburger {
+        display: none !important;
     }
     
     .mobile-logo img {
-        width: var(--header-logo-desktop);
-    }
-    
-    .mobile-hamburger {
-        display: none;
+        height: 36px;
+        max-width: 80px;
     }
     
     .topbar-spacer {
@@ -915,28 +901,14 @@ body {
     
     /* Sidebar compacto no desktop - sem logo */
     .sidebar-header {
-        display: none;
+        display: none !important;
     }
     
     .sidebar-user {
-        padding: 16px 20px;
+        padding-top: 20px;
         border-bottom: 1px solid rgba(255,255,255,0.1);
-        margin-bottom: 5px;
-    }
-    
-    .sidebar-user .user-avatar {
-        width: 40px;
-        height: 40px;
-        font-size: 22px;
-    }
-    
-    .sidebar-user .user-name {
-        font-size: 15px;
-        font-weight: 500;
-    }
-    
-    .sidebar-user .user-role {
-        display: none;
+        padding-bottom: 15px;
+        margin-bottom: 10px;
     }
     
     .sidebar {
@@ -945,11 +917,20 @@ body {
     
     .main-content {
         margin-left: 220px;
-        padding-top: 0;
     }
     
     .desktop-only {
-        display: flex;
+        display: flex !important;
+    }
+    
+    .topbar {
+        position: sticky;
+        padding: 0 20px;
+        height: var(--topbar-height);
+    }
+    
+    .main-content {
+        padding-top: 0;
     }
 }
 
