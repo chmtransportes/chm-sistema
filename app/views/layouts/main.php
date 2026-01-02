@@ -149,45 +149,29 @@ $csrfToken = Session::getCsrfToken();
 
     <!-- Main Content -->
     <main id="main-content" class="main-content">
-        <!-- Top Bar -->
-        <header class="topbar">
-            <!-- MOBILE: Logo esquerda -->
-            <a href="<?= APP_URL ?>dashboard" class="mobile-logo">
-                <img src="<?= ASSETS_URL ?>img/logo-chm.png" alt="CHM">
+        <!-- Top Header -->
+        <header class="top-header">
+            <!-- Logo -->
+            <a href="<?= APP_URL ?>dashboard" class="top-header-logo">
+                <img src="<?= ASSETS_URL ?>img/logo-chm.png" alt="CHM Transportes">
             </a>
 
-            <!-- DESKTOP: Breadcrumb -->
-            <?php if (isset($breadcrumb) && is_array($breadcrumb)): ?>
-            <nav aria-label="breadcrumb" class="desktop-only breadcrumb-nav">
-                <ol class="breadcrumb mb-0">
-                    <?php foreach ($breadcrumb as $i => $item): ?>
-                    <?php if (isset($item['url'])): ?>
-                    <li class="breadcrumb-item"><a href="<?= $item['url'] ?>"><?= $item['label'] ?></a></li>
-                    <?php else: ?>
-                    <li class="breadcrumb-item active"><?= $item['label'] ?></li>
-                    <?php endif; ?>
-                    <?php endforeach; ?>
-                </ol>
-            </nav>
-            <?php endif; ?>
-
             <!-- Spacer -->
-            <div class="topbar-spacer"></div>
+            <div class="top-header-spacer"></div>
 
-            <!-- MOBILE: Hamburger direita -->
-            <button class="mobile-hamburger" onclick="toggleSidebar()" aria-label="Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-
-            <!-- DESKTOP: user e logout -->
-            <div class="desktop-only topbar-user">
-                <span><?= htmlspecialchars($userName) ?></span>
+            <!-- Desktop: Logout -->
+            <div class="top-header-logout desktop-only">
                 <a href="<?= APP_URL ?>logout" class="btn btn-outline-danger btn-sm">
                     <i class="bi bi-box-arrow-right me-1"></i>Sair
                 </a>
             </div>
+
+            <!-- Mobile: Hamburger -->
+            <button class="top-header-hamburger mobile-only" onclick="toggleSidebar()" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </header>
 
         <!-- Flash Messages -->

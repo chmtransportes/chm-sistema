@@ -172,23 +172,121 @@ body {
     flex-direction: column;
 }
 
-.topbar {
-    height: var(--topbar-height);
+/* ============================================
+   TOP HEADER - LIMPO E SEM DUPLICAÇÃO
+   @author ch-mestriner (https://ch-mestriner.com.br)
+   @date 02/01/2026
+   ============================================ */
+
+/* Header Base */
+.top-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 70px;
     background: #fff;
     border-bottom: 1px solid #e9ecef;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
     position: sticky;
     top: 0;
-    z-index: 100;
-    box-shadow: var(--shadow);
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
-.topbar-actions {
+/* Logo */
+.top-header-logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    flex-shrink: 0;
+}
+
+.top-header-logo img {
+    width: 180px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Spacer */
+.top-header-spacer {
+    flex: 1;
+}
+
+/* Desktop Logout */
+.top-header-logout {
+    display: flex;
+    align-items: center;
+}
+
+/* Mobile Hamburger */
+.top-header-hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    background: transparent;
+    border: 2px solid var(--primary);
+    border-radius: 6px;
+    cursor: pointer;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.top-header-hamburger span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 2px;
+    transition: all 0.2s ease;
+}
+
+.top-header-hamburger:active {
+    background: var(--primary);
+}
+
+.top-header-hamburger:active span {
+    background: #fff;
+}
+
+/* Main content - compensar header fixo */
+.main-content {
+    padding-top: 78px;
+}
+
+/* Mobile */
+@media (max-width: 991.98px) {
+    .top-header {
+        padding: 0 16px;
+        height: 60px;
+    }
+    
+    .top-header-logo img {
+        width: 120px;
+    }
+    
+    .main-content {
+        padding-top: 68px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 992px) {
+    .top-header {
+        height: 60px;
+    }
+    
+    .top-header-logo img {
+        width: 200px;
+    }
+    
+    .main-content {
+        padding-top: 68px;
+    }
 }
 
 .page-content {
@@ -265,7 +363,7 @@ body {
     font-weight: 600;
     font-size: 13px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     color: #6c757d;
     border-bottom-width: 1px;
 }
@@ -767,7 +865,7 @@ body {
     left: 0;
     right: 0;
     z-index: 1000;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    box-shadow: none;
 }
 
 /* Logo Mobile - Esquerda */
