@@ -172,18 +172,7 @@ body {
     flex-direction: column;
 }
 
-.topbar {
-    height: var(--topbar-height);
-    background: #fff;
-    border-bottom: 1px solid #e9ecef;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: var(--shadow);
-}
+/* Topbar - regras centralizadas na seção TOP HEADER */
 
 .topbar-actions {
     display: flex;
@@ -398,12 +387,6 @@ body {
         padding: 15px 20px;
     }
     
-    /* Topbar Mobile */
-    .topbar {
-        padding: 8px 12px;
-        gap: 8px;
-    }
-
     .page-content {
         padding: 15px;
     }
@@ -748,29 +731,40 @@ body {
 }
 
 /* ============================================
-   MOBILE-FIRST BASE SCREEN
+   TOP HEADER - CONTROLE CENTRALIZADO
+   Tamanhos: Desktop 200px, Tablet 160px, Mobile 120px
    @author ch-mestriner (https://ch-mestriner.com.br)
-   @date 29/12/2025
+   @date 02/01/2026
    ============================================ */
 
-/* === TOPBAR MOBILE (default) === */
+/* Variáveis do Header (ÚNICO LUGAR PARA ALTERAR TAMANHOS) */
+:root {
+    --header-logo-desktop: 200px;
+    --header-logo-tablet: 160px;
+    --header-logo-mobile: 120px;
+    --header-height-desktop: 60px;
+    --header-height-tablet: 70px;
+    --header-height-mobile: 70px;
+}
+
+/* Topbar Base */
 .topbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 16px;
-    height: 128px;
+    padding: 0 16px;
+    height: var(--header-height-mobile);
     background: #fff;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e9ecef;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
-/* Logo Mobile - Esquerda */
+/* Logo no Header - Base */
 .mobile-logo {
     display: flex;
     align-items: center;
@@ -778,9 +772,8 @@ body {
 }
 
 .mobile-logo img {
-    height: 92px;
-    width: auto;
-    max-width: 211px;
+    width: var(--header-logo-mobile);
+    height: auto;
     object-fit: contain;
 }
 
@@ -795,12 +788,12 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 44px;
-    height: 44px;
-    padding: 10px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
     background: transparent;
     border: 2px solid var(--primary);
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
     gap: 4px;
     flex-shrink: 0;
@@ -808,7 +801,7 @@ body {
 
 .mobile-hamburger span {
     display: block;
-    width: 20px;
+    width: 18px;
     height: 2px;
     background: var(--primary);
     border-radius: 2px;
@@ -843,7 +836,7 @@ body {
 
 /* Main content - compensar header fixo */
 .main-content {
-    padding-top: 136px;
+    padding-top: calc(var(--header-height-mobile) + 8px);
 }
 
 /* Page content mobile - BRANCO LIMPO */
@@ -884,15 +877,36 @@ body {
     }
 }
 
-/* === DESKTOP (992px+) === */
-@media (min-width: 992px) {
-    .mobile-hamburger {
-        display: none !important;
+/* === TABLET (768px - 991px) === */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .topbar {
+        height: var(--header-height-tablet);
     }
     
     .mobile-logo img {
-        height: 36px;
-        max-width: 80px;
+        width: var(--header-logo-tablet);
+    }
+    
+    .main-content {
+        padding-top: calc(var(--header-height-tablet) + 8px);
+    }
+}
+
+/* === DESKTOP (992px+) === */
+@media (min-width: 992px) {
+    .topbar {
+        position: sticky;
+        top: 0;
+        height: var(--header-height-desktop);
+        padding: 0 20px;
+    }
+    
+    .mobile-logo img {
+        width: var(--header-logo-desktop);
+    }
+    
+    .mobile-hamburger {
+        display: none;
     }
     
     .topbar-spacer {
@@ -901,14 +915,28 @@ body {
     
     /* Sidebar compacto no desktop - sem logo */
     .sidebar-header {
-        display: none !important;
+        display: none;
     }
     
     .sidebar-user {
-        padding-top: 20px;
+        padding: 16px 20px;
         border-bottom: 1px solid rgba(255,255,255,0.1);
-        padding-bottom: 15px;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
+    }
+    
+    .sidebar-user .user-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+    }
+    
+    .sidebar-user .user-name {
+        font-size: 15px;
+        font-weight: 500;
+    }
+    
+    .sidebar-user .user-role {
+        display: none;
     }
     
     .sidebar {
@@ -917,20 +945,11 @@ body {
     
     .main-content {
         margin-left: 220px;
+        padding-top: 0;
     }
     
     .desktop-only {
-        display: flex !important;
-    }
-    
-    .topbar {
-        position: sticky;
-        padding: 0 20px;
-        height: var(--topbar-height);
-    }
-    
-    .main-content {
-        padding-top: 0;
+        display: flex;
     }
 }
 
