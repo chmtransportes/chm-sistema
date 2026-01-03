@@ -35,8 +35,8 @@ if (file_exists($envLoaderPath)) {
 }
 
 // Versão do sistema
-define('CHM_VERSION', '2.11.0');
-define('CHM_VERSION_DATE', '2026-01-03 03:12');
+define('CHM_VERSION', '2.11.1');
+define('CHM_VERSION_DATE', '03/01/2026 03:26');
 
 // Ambiente (production ou development)
 define('CHM_ENVIRONMENT', EnvLoader::get('APP_ENV', 'production'));

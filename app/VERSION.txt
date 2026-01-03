@@ -1,4 +1,4 @@
-CHM-SISTEMA VERSION: 2.10.9
-Data: 03/01/2026 03:12
+CHM-SISTEMA VERSION: 2.11.0
+Data: 03/01/2026 03:26
 Deployed by: Cascade (claude-sonnet-4-20250514)
-Backup: 03/01/2026 03:12 - Versão estável (header colado na sidebar, espaço Dashboard)
+Backup: 03/01/2026 03:26 - Header 120px, logo 160px
