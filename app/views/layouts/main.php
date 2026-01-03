@@ -150,19 +150,20 @@ $csrfToken = Session::getCsrfToken();
     <main id="main-content" class="main-content">
         <!-- TOP HEADER -->
         <header class="top-header">
-            <!-- Botão Hamburguer (mobile/tablet) -->
-            <button class="top-header-hamburger mobile-only" onclick="toggleSidebar()">
-                <i class="bi bi-list"></i>
-            </button>
-            
+            <!-- Logo (esquerda) -->
             <a href="<?= APP_URL ?>dashboard" class="top-header-logo">
                 <img src="<?= ASSETS_URL ?>img/logo.png" alt="CHM Sistema">
             </a>
             
-            <!-- Botão Sair (apenas desktop) -->
+            <!-- Botão Sair (apenas desktop - direita) -->
             <a href="<?= APP_URL ?>logout" class="top-header-logout desktop-only">
                 <i class="bi bi-box-arrow-right"></i> <span>Sair</span>
             </a>
+            
+            <!-- Botão Hamburguer (mobile/tablet - direita) -->
+            <button class="top-header-hamburger mobile-only" onclick="toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
         </header>
 
         <!-- Flash Messages -->
