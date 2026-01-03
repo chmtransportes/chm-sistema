@@ -2,7 +2,8 @@
 /**
  * CHM Sistema - Tela de Login
  * @author ch-mestriner (https://ch-mestriner.com.br)
- * @date 23/12/2025
+ * @date 03/01/2026 03:12
+ * @version 2.10.9
  */
 
 use CHM\Core\Session;
