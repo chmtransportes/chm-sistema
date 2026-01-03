@@ -805,8 +805,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 130px;
-    padding: 20px 30px;
+    height: 120px;
+    padding: 15px 30px;
     background: #ffffff;
     border-bottom: 1px solid #e0e0e0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
@@ -820,8 +820,8 @@ body {
 }
 
 .top-header-logo img {
-    width: 160px;
-    max-width: 160px;
+    width: 180px;
+    max-width: 180px;
     height: auto;
     max-height: 90px;
     object-fit: contain;
