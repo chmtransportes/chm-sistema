@@ -54,31 +54,17 @@ body {
 }
 
 .sidebar-header {
-    padding: 20px;
+    padding: 15px 20px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-.sidebar-brand {
+.sidebar-title {
     color: #fff;
-    text-decoration: none;
-    font-size: 24px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.sidebar-brand i {
-    color: var(--accent);
-}
-
-.sidebar-logo {
-    max-width: 120px;
-    height: 50px;
-    object-fit: contain;
+    font-size: 18px;
+    font-weight: 600;
 }
 
 .sidebar-toggle {
@@ -173,37 +159,34 @@ body {
 }
 
 /* ============================================
-   CABEÇALHO NOVO - LIMPO
+   TOP HEADER - Único e Global
    @author ch-mestriner (https://ch-mestriner.com.br)
-   @date 02/01/2026
+   @date 03/01/2026
    ============================================ */
 
-.site-header {
-    background: #ffffff;
-    border-bottom: 1px solid #e0e0e0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.header-container {
+.top-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 25px;
-    max-width: 100%;
+    padding: 12px 20px;
+    background: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
-.header-left {
-    flex-shrink: 0;
+.top-header-logo {
+    display: flex;
+    align-items: center;
 }
 
-.header-right {
-    flex-shrink: 0;
+.top-header-logo img {
+    height: 50px;
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
 }
 
-.btn-sair {
+.top-header-logout {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -218,37 +201,41 @@ body {
     transition: background 0.2s ease;
 }
 
-.btn-sair:hover {
+.top-header-logout:hover {
     background: #c82333;
     color: #fff;
     text-decoration: none;
 }
 
-.btn-sair i {
+.top-header-logout i {
     font-size: 16px;
 }
 
-.header-logo {
-    height: 60px;
-    width: auto;
-    max-width: 180px;
-    object-fit: contain;
-}
-
-/* Mobile */
+/* Header Responsivo */
 @media (max-width: 768px) {
-    .header-container {
+    .top-header {
         padding: 10px 15px;
     }
     
-    .header-logo {
-        height: 45px;
-        max-width: 140px;
+    .top-header-logo img {
+        height: 40px;
+        max-width: 130px;
     }
     
-    .btn-sair {
+    .top-header-logout {
         padding: 6px 12px;
         font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .top-header-logo img {
+        height: 35px;
+        max-width: 110px;
+    }
+    
+    .top-header-logout span {
+        display: none;
     }
 }
 

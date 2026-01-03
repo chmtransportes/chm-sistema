@@ -46,9 +46,7 @@ $csrfToken = Session::getCsrfToken();
     <!-- Sidebar -->
     <nav id="sidebar" class="sidebar">
         <div class="sidebar-header">
-            <a href="<?= APP_URL ?>dashboard" class="sidebar-brand">
-                <img src="<?= ASSETS_URL ?>img/logo-chm.png" alt="CHM Transportes" class="sidebar-logo">
-            </a>
+            <span class="sidebar-title">Menu</span>
             <button class="sidebar-toggle d-lg-none" onclick="toggleSidebar()">
                 <i class="bi bi-x-lg"></i>
             </button>
@@ -149,22 +147,14 @@ $csrfToken = Session::getCsrfToken();
 
     <!-- Main Content -->
     <main id="main-content" class="main-content">
-        <!-- CABEÇALHO NOVO - Fundo Branco -->
-        <header class="site-header">
-            <div class="header-container">
-                <!-- Logo (Esquerda) -->
-                <div class="header-left">
-                    <a href="<?= APP_URL ?>dashboard">
-                        <img src="<?= ASSETS_URL ?>img/logo-chm.png" alt="CHM Sistema" class="header-logo">
-                    </a>
-                </div>
-                <!-- Botão Sair (Direita) -->
-                <div class="header-right">
-                    <a href="<?= APP_URL ?>logout" class="btn-sair">
-                        <i class="bi bi-box-arrow-right"></i> Sair
-                    </a>
-                </div>
-            </div>
+        <!-- TOP HEADER - Único e Global -->
+        <header class="top-header">
+            <a href="<?= APP_URL ?>dashboard" class="top-header-logo">
+                <img src="<?= ASSETS_URL ?>img/logo.png" alt="CHM Sistema">
+            </a>
+            <a href="<?= APP_URL ?>logout" class="top-header-logout">
+                <i class="bi bi-box-arrow-right"></i> Sair
+            </a>
         </header>
 
         <!-- Flash Messages -->

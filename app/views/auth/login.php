@@ -49,19 +49,16 @@ $csrfToken = Session::getCsrfToken();
             text-align: center;
             margin-bottom: 30px;
         }
-        .login-logo i {
-            font-size: 48px;
-            color: #e94560;
+        .login-logo-img {
+            max-width: 180px;
+            height: auto;
+            margin-bottom: 10px;
         }
         .login-logo h1 {
             font-size: 18px;
             font-weight: 600;
             color: #6c757d;
             margin: 10px 0 5px;
-        }
-        .login-logo p {
-            color: #6c757d;
-            font-size: 14px;
         }
         .form-floating {
             margin-bottom: 15px;
@@ -123,7 +120,7 @@ $csrfToken = Session::getCsrfToken();
     <div class="login-container">
         <div class="login-card">
             <div class="login-logo">
-                <img src="<?= ASSETS_URL ?>img/logo-chm.png" alt="CHM" style="max-width: 150px;">
+                <img src="<?= ASSETS_URL ?>img/logo.png" alt="CHM Sistema" class="login-logo-img">
                 <h1>CHM-SISTEMA-APP</h1>
             </div>
 
