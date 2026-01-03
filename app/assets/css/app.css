@@ -168,10 +168,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 25px;
+    padding: 14px 24px;
+    min-height: 64px;
     background: #ffffff;
     border-bottom: 1px solid #e0e0e0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
 .top-header-logo {
@@ -180,62 +181,65 @@ body {
 }
 
 .top-header-logo img {
-    height: 38px;
-    width: auto;
-    max-width: 130px;
+    height: auto;
+    width: 140px;
+    max-width: 160px;
     object-fit: contain;
 }
 
 .top-header-logout {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
-    padding: 8px 16px;
-    background: #dc3545;
+    padding: 10px 18px;
+    background: #1a1a2e;
     color: #fff;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 14px;
     font-weight: 500;
     text-decoration: none;
-    transition: background 0.2s ease;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .top-header-logout:hover {
-    background: #c82333;
+    background: #16213e;
     color: #fff;
     text-decoration: none;
 }
 
 .top-header-logout i {
-    font-size: 16px;
+    font-size: 15px;
 }
 
 /* Header Responsivo */
 @media (max-width: 768px) {
     .top-header {
-        padding: 14px 15px;
+        padding: 12px 16px;
+        min-height: 56px;
     }
     
     .top-header-logo img {
-        height: 32px;
-        max-width: 110px;
+        width: 120px;
+        max-width: 130px;
     }
     
     .top-header-logout {
-        padding: 6px 12px;
+        padding: 8px 14px;
         font-size: 13px;
     }
 }
 
 @media (max-width: 480px) {
     .top-header-logo img {
-        height: 28px;
-        max-width: 95px;
+        width: 100px;
+        max-width: 110px;
     }
     
-    .top-header-logout span {
-        display: none;
+    .top-header-logout {
+        padding: 8px 12px;
     }
 }
 
