@@ -152,15 +152,13 @@ body {
 /* Main Content */
 .main-content {
     margin-left: var(--sidebar-width);
+    padding-top: var(--header-height);
     min-height: 100vh;
     transition: var(--transition);
     display: flex;
     flex-direction: column;
 }
 
-#main-content {
-    margin-top: 130px;
-}
 
 /* ============================================
    TOP HEADER - Único e Global
@@ -168,15 +166,24 @@ body {
    @date 03/01/2026
    ============================================ */
 
+:root {
+    --header-height: 100px;
+}
+
 .top-header {
+    position: fixed;
+    top: 0;
+    left: var(--sidebar-width);
+    right: 0;
+    height: var(--header-height);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 24px;
-    min-height: 120px;
+    padding: 0 24px;
     background: #ffffff;
     border-bottom: 1px solid #e0e0e0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+    z-index: 900;
 }
 
 .top-header-logo {
@@ -221,8 +228,13 @@ body {
 /* Header Responsivo */
 @media (max-width: 768px) {
     .top-header {
-        padding: 15px 16px;
-        min-height: 100px;
+        left: 0;
+        padding: 0 16px;
+        height: 80px;
+    }
+    
+    .main-content {
+        padding-top: 80px;
     }
     
     .top-header-logo img {
@@ -238,7 +250,11 @@ body {
 
 @media (max-width: 480px) {
     .top-header {
-        min-height: 90px;
+        height: 70px;
+    }
+    
+    .main-content {
+        padding-top: 70px;
     }
     
     .top-header-logo img {
