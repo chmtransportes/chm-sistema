@@ -2,8 +2,8 @@
 /**
  * CHM Sistema - Configurações Globais
  * @author ch-mestriner (https://ch-mestriner.com.br)
- * @date 27/12/2025 01:56
- * @version 2.0.0
+ * @date 03/01/2026 02:03
+ * @version 2.9.7
  */
 
 // Previne acesso direto
@@ -36,7 +36,7 @@ if (file_exists($envLoaderPath)) {
 
 // Versão do sistema
 define('CHM_VERSION', '2.9.7');
-define('CHM_VERSION_DATE', '2026-01-03');
+define('CHM_VERSION_DATE', '2026-01-03 02:03');
 
 // Ambiente (production ou development)
 define('CHM_ENVIRONMENT', EnvLoader::get('APP_ENV', 'production'));
