@@ -808,13 +808,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
+    width: calc(100% - 40px);
     height: var(--header-height);
-    padding: 15px 40px;
-    margin: 0;
+    padding: 15px 30px;
+    margin: 20px;
+    margin-bottom: 0;
     background: #ffffff;
-    border-bottom: 1px solid #e0e0e0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
     flex-shrink: 0;
 }
 
