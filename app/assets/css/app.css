@@ -826,17 +826,13 @@ body {
     display: flex;
     align-items: center;
     height: 100px;
-    flex-shrink: 0;
 }
 
 .top-header-logo img {
-    width: 160px !important;
-    height: 80px !important;
-    min-width: 160px !important;
-    max-width: 160px !important;
-    min-height: 80px !important;
-    max-height: 80px !important;
-    object-fit: contain !important;
+    width: 160px;
+    height: auto;
+    max-height: 90px;
+    object-fit: contain;
 }
 
 .top-header-logout {
@@ -867,134 +863,29 @@ body {
     font-size: 16px;
 }
 
-/* Botão Hamburguer - escondido por padrão */
-.top-header-hamburger {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    background: var(--primary);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 24px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    flex-shrink: 0;
-}
-
-.top-header-hamburger:hover {
-    background: var(--primary-light);
-}
-
-/* Mobile/Tablet: Header e Layout ajustes */
+/* Mobile: Header ajustes */
 @media (max-width: 991.98px) {
-    /* Main content ocupa 100% no mobile */
-    .main-content {
-        margin-left: 0;
-        width: 100%;
-        max-width: 100%;
-    }
-    
-    /* Header mobile/tablet */
     .top-header {
-        padding: 0 10px !important;
-        height: 120px !important;
-        min-height: 120px !important;
-        max-height: 120px !important;
-        justify-content: space-between !important;
-    }
-    
-    /* Logo CANTO ESQUERDO */
-    .top-header-logo {
-        height: 100px;
-        margin: 0 !important;
-        padding: 0 !important;
+        padding: 0 15px;
     }
     
     .top-header-logo img {
-        width: 120px !important;
-        height: 70px !important;
-        max-height: 70px !important;
-    }
-    
-    /* Hamburguer CANTO DIREITO */
-    .top-header-hamburger {
-        display: flex !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-    
-    /* Esconder botão sair no mobile (usa sidebar) */
-    .top-header-logout {
-        display: none !important;
+        width: 140px;
     }
 }
 
-/* Tablet: 769px a 991px */
-@media (min-width: 769px) and (max-width: 991.98px) {
-    .top-header {
-        height: 110px;
-        min-height: 110px;
-        max-height: 110px;
-    }
-    
-    .top-header-logo img {
-        width: 150px;
-        max-height: 80px;
-    }
-}
-
-/* Mobile pequeno: até 480px */
 @media (max-width: 480px) {
     .top-header {
         padding: 0 10px;
         height: 80px;
-        min-height: 80px;
-        max-height: 80px;
-    }
-    
-    .top-header-logo {
-        height: 60px;
     }
     
     .top-header-logo img {
-        width: 110px;
-        max-height: 50px;
+        width: 120px;
     }
     
     .top-header-logout {
         padding: 8px 12px;
-        font-size: 12px;
-        gap: 4px;
-    }
-    
-    .top-header-logout i {
-        font-size: 14px;
-    }
-}
-
-/* Ultra pequeno: até 360px */
-@media (max-width: 360px) {
-    .top-header {
-        padding: 0 8px;
-        height: 70px;
-        min-height: 70px;
-        max-height: 70px;
-    }
-    
-    .top-header-logo img {
-        width: 90px;
-        max-height: 45px;
-    }
-    
-    .top-header-logout {
-        padding: 6px 10px;
-        font-size: 11px;
-    }
-    
-    .top-header-logout span {
-        display: none;
+        font-size: 13px;
     }
 }
