@@ -864,6 +864,27 @@ body {
     font-size: 16px;
 }
 
+/* Botão Hamburguer - escondido por padrão */
+.top-header-hamburger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.top-header-hamburger:hover {
+    background: var(--primary-light);
+}
+
 /* Mobile/Tablet: Header e Layout ajustes */
 @media (max-width: 991.98px) {
     /* Main content ocupa 100% no mobile */
@@ -873,6 +894,7 @@ body {
         max-width: 100%;
     }
     
+    /* Header mobile/tablet */
     .top-header {
         padding: 0 15px;
         height: 100px;
@@ -880,18 +902,27 @@ body {
         max-height: 100px;
     }
     
+    /* Mostrar hamburguer no mobile */
+    .top-header-hamburger {
+        display: flex !important;
+    }
+    
+    /* Logo centralizado no mobile */
     .top-header-logo {
         height: 80px;
+        flex: 1;
+        justify-content: center;
     }
     
     .top-header-logo img {
-        width: 140px;
-        max-height: 70px;
+        width: 140px !important;
+        height: 70px !important;
+        max-height: 70px !important;
     }
     
+    /* Esconder botão sair no mobile (usa sidebar) */
     .top-header-logout {
-        padding: 10px 16px;
-        font-size: 14px;
+        display: none !important;
     }
 }
 
