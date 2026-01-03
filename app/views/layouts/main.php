@@ -152,7 +152,7 @@ $csrfToken = Session::getCsrfToken();
         <header class="top-header">
             <!-- Logo (esquerda) -->
             <a href="<?= APP_URL ?>dashboard" class="top-header-logo">
-                <img src="<?= ASSETS_URL ?>img/logo.png" alt="CHM Sistema">
+                <img src="<?= ASSETS_URL ?>img/logo.png" alt="CHM Sistema" width="160" height="80" style="width:160px;height:80px;max-width:160px;max-height:80px;object-fit:contain;">
             </a>
             
             <!-- Botão Sair (apenas desktop - direita) -->
