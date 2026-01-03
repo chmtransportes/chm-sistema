@@ -805,12 +805,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 140px;
+    height: 120px;
     padding: 15px 30px;
     background: #ffffff;
-    border-bottom: none;
-    box-shadow: none;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
     flex-shrink: 0;
+    margin: 0;
 }
 
 .top-header-logo {
