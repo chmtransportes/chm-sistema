@@ -2,8 +2,8 @@
 /**
  * CHM Sistema - Configurações Globais
  * @author ch-mestriner (https://ch-mestriner.com.br)
- * @date 03/01/2026 02:03
- * @version 2.9.7
+ * @date 03/01/2026 03:12
+ * @version 2.10.9
  */
 
 // Previne acesso direto
