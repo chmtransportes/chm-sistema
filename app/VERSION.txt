@@ -1,4 +1,4 @@
-CHM-SISTEMA VERSION: 2.12.0
-Data: 03/01/2026 05:10
+CHM-SISTEMA VERSION: 2.12.1
+Data: 03/01/2026 05:15
 Deployed by: Cascade (claude-sonnet-4-20250514)
-Alteração: Mobile/Tablet - Hamburguer bonito, cabeçalho ajustado, Sair escondido
+Alteração: Mobile/Tablet FINAL FIX - Logo pequeno, header compacto, hamburguer grande
