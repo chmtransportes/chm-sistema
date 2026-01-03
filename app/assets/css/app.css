@@ -1,8 +1,8 @@
 /**
  * CHM Sistema - Estilos Principais
  * @author ch-mestriner (https://ch-mestriner.com.br)
- * @date 03/01/2026 03:12
- * @version 2.10.9
+ * @date 03/01/2026 06:04
+ * @version 2.14.0
  */
 
 :root {
@@ -890,11 +890,11 @@ body {
 }
 
 /* ============================================
-   MOBILE/TABLET FINAL FIX (max-width: 991px)
-   Logo ESQUERDA, Hamburguer DIREITA, Sair ESCONDIDO
-   Desktop NÃO é alterado
+   MOBILE/TABLET FINAL (max-width: 991px)
+   Header 45px, Logo 60px esquerda, Hamburguer direita visível, Sair OCULTO
+   Desktop INTOCADO
    @author ch-mestriner
-   @date 03/01/2026 05:22
+   @date 03/01/2026 06:04
    ============================================ */
 @media (max-width: 991.98px) {
     /* Main content ocupa 100% */
@@ -904,14 +904,14 @@ body {
         max-width: 100% !important;
     }
     
-    /* Header mobile/tablet - COMPACTO */
+    /* Header mobile/tablet */
     .top-header {
         position: sticky !important;
         top: 0 !important;
-        padding: 8px 15px !important;
-        height: 60px !important;
-        min-height: 60px !important;
-        max-height: 60px !important;
+        padding: 6px 12px !important;
+        height: 45px !important;
+        min-height: 45px !important;
+        max-height: 45px !important;
         display: flex !important;
         flex-direction: row !important;
         align-items: center !important;
@@ -925,17 +925,17 @@ body {
     /* Logo ESQUERDA */
     .top-header-logo {
         order: 1 !important;
-        height: 45px !important;
+        height: 36px !important;
         display: flex !important;
         align-items: center !important;
         flex-shrink: 0 !important;
     }
     
     .top-header-logo img {
-        width: 90px !important;
-        height: 38px !important;
-        max-width: 90px !important;
-        max-height: 38px !important;
+        width: 60px !important;
+        height: 24px !important;
+        max-width: 60px !important;
+        max-height: 24px !important;
         min-width: unset !important;
         min-height: unset !important;
         object-fit: contain !important;
@@ -952,28 +952,62 @@ body {
         left: -9999px !important;
     }
     
-    /* Hamburguer DIREITA - BONITO */
+    /* Hamburguer DIREITA */
     .top-header-hamburger {
         order: 3 !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        width: 46px !important;
-        height: 46px !important;
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+        width: 38px !important;
+        height: 38px !important;
+        background: #1a1a2e !important;
         color: #fff !important;
         border: none !important;
-        border-radius: 12px !important;
-        font-size: 24px !important;
+        border-radius: 6px !important;
+        font-size: 0 !important;
+        line-height: 0 !important;
         cursor: pointer !important;
-        box-shadow: 0 3px 10px rgba(26,26,46,0.3) !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
         flex-shrink: 0 !important;
         transition: all 0.2s ease !important;
+        position: relative !important;
+    }
+    
+    .top-header-hamburger:hover {
+        background: #16213e !important;
     }
     
     .top-header-hamburger:active {
         transform: scale(0.92) !important;
-        box-shadow: 0 1px 5px rgba(26,26,46,0.2) !important;
+    }
+    
+    .top-header-hamburger span {
+        display: block !important;
+        width: 20px !important;
+        height: 2px !important;
+        background: #fff !important;
+        position: relative !important;
+        border-radius: 1px !important;
+    }
+    
+    .top-header-hamburger span::before,
+    .top-header-hamburger span::after {
+        content: '' !important;
+        position: absolute !important;
+        width: 20px !important;
+        height: 2px !important;
+        background: #fff !important;
+        border-radius: 1px !important;
+        left: 0 !important;
+        transition: all 0.2s ease !important;
+    }
+    
+    .top-header-hamburger span::before {
+        top: -6px !important;
+    }
+    
+    .top-header-hamburger span::after {
+        top: 6px !important;
     }
     
     /* Sidebar mobile */
@@ -997,33 +1031,10 @@ body {
 /* Tablet: 768px a 991px */
 @media (min-width: 768px) and (max-width: 991.98px) {
     .top-header {
-        height: 70px !important;
-        min-height: 70px !important;
-        max-height: 70px !important;
-        padding: 10px 20px !important;
-    }
-    
-    .top-header-logo img {
-        width: 110px !important;
-        height: 45px !important;
-        max-width: 110px !important;
-        max-height: 45px !important;
-    }
-    
-    .top-header-hamburger {
-        width: 50px !important;
         height: 50px !important;
-        font-size: 26px !important;
-    }
-}
-
-/* Mobile pequeno: até 480px */
-@media (max-width: 480px) {
-    .top-header {
-        padding: 6px 10px !important;
-        height: 55px !important;
-        min-height: 55px !important;
-        max-height: 55px !important;
+        min-height: 50px !important;
+        max-height: 50px !important;
+        padding: 8px 14px !important;
     }
     
     .top-header-logo {
@@ -1031,16 +1042,83 @@ body {
     }
     
     .top-header-logo img {
-        width: 80px !important;
-        height: 32px !important;
-        max-width: 80px !important;
-        max-height: 32px !important;
+        width: 75px !important;
+        height: 30px !important;
+        max-width: 75px !important;
+        max-height: 30px !important;
     }
     
     .top-header-hamburger {
         width: 42px !important;
         height: 42px !important;
-        font-size: 22px !important;
-        border-radius: 10px !important;
+        font-size: 0 !important;
+        line-height: 0 !important;
+    }
+    
+    .top-header-hamburger span {
+        width: 22px !important;
+        height: 2px !important;
+    }
+    
+    .top-header-hamburger span::before,
+    .top-header-hamburger span::after {
+        width: 22px !important;
+        height: 2px !important;
+    }
+    
+    .top-header-hamburger span::before {
+        top: -7px !important;
+    }
+    
+    .top-header-hamburger span::after {
+        top: 7px !important;
+    }
+}
+
+/* Mobile pequeno: até 480px */
+@media (max-width: 480px) {
+    .top-header {
+        padding: 5px 10px !important;
+        height: 45px !important;
+        min-height: 45px !important;
+        max-height: 45px !important;
+    }
+    
+    .top-header-logo {
+        height: 36px !important;
+    }
+    
+    .top-header-logo img {
+        width: 58px !important;
+        height: 23px !important;
+        max-width: 58px !important;
+        max-height: 23px !important;
+    }
+    
+    .top-header-hamburger {
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 0 !important;
+        line-height: 0 !important;
+        border-radius: 5px !important;
+    }
+    
+    .top-header-hamburger span {
+        width: 18px !important;
+        height: 2px !important;
+    }
+    
+    .top-header-hamburger span::before,
+    .top-header-hamburger span::after {
+        width: 18px !important;
+        height: 2px !important;
+    }
+    
+    .top-header-hamburger span::before {
+        top: -6px !important;
+    }
+    
+    .top-header-hamburger span::after {
+        top: 6px !important;
     }
 }

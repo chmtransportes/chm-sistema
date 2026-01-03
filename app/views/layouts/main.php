@@ -2,8 +2,8 @@
 /**
  * CHM Sistema - Layout Principal
  * @author ch-mestriner (https://ch-mestriner.com.br)
- * @date 03/01/2026 03:12
- * @version 2.10.9
+ * @date 03/01/2026 06:04
+ * @version 2.14.0
  */
 
 use CHM\Core\Session;
@@ -41,7 +41,7 @@ $csrfToken = Session::getCsrfToken();
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="<?= ASSETS_URL ?>css/app.css?v=<?= CHM_VERSION ?>" rel="stylesheet">
+    <link href="<?= ASSETS_URL ?>css/app.css?v=<?= CHM_VERSION ?>&t=<?= time() ?>" rel="stylesheet">
 </head>
 <body>
     <!-- Sidebar -->
@@ -160,7 +160,7 @@ $csrfToken = Session::getCsrfToken();
             </a>
             <!-- Hamburguer Mobile/Tablet - DIREITA -->
             <button class="top-header-hamburger" onclick="toggleSidebar()" aria-label="Menu">
-                <i class="bi bi-list"></i>
+                <span></span>
             </button>
         </header>
 

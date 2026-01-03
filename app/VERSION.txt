@@ -1,4 +1,5 @@
-CHM-SISTEMA VERSION: 2.12.3
-Data: 03/01/2026 05:22
+CHM-SISTEMA VERSION: 2.14.0
+Data: 03/01/2026 06:04
 Deployed by: Cascade (claude-sonnet-4-20250514)
-Alteração: Mobile/Tablet - Logo ESQUERDA, Hamburguer DIREITA bonito, Sair ESCONDIDO, header compacto
+Alteração: Mobile/Tablet PADRÃO - Header 45-50px, Logo 58-75px esquerda, Hamburguer 36-42px direita 3 linhas visível, Sair oculto, Desktop intocado
+Backup: VERSÃO ESTÁVEL para rollback
