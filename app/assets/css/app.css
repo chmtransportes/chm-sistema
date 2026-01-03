@@ -863,29 +863,127 @@ body {
     font-size: 16px;
 }
 
-/* Mobile: Header ajustes */
-@media (max-width: 991.98px) {
-    .top-header {
-        padding: 0 15px;
-    }
-    
-    .top-header-logo img {
-        width: 140px;
-    }
+/* Botão Hamburguer - escondido por padrão (só aparece mobile/tablet) */
+.top-header-hamburger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 26px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
 }
 
-@media (max-width: 480px) {
+.top-header-hamburger:hover {
+    background: var(--primary-light);
+    transform: scale(1.05);
+}
+
+.top-header-hamburger:active {
+    transform: scale(0.95);
+}
+
+/* ============================================
+   MOBILE/TABLET ONLY (max-width: 991px)
+   Desktop NÃO é alterado
+   ============================================ */
+@media (max-width: 991.98px) {
+    /* Main content ocupa 100% */
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    /* Header mobile/tablet */
     .top-header {
-        padding: 0 10px;
+        padding: 0 15px;
         height: 80px;
+        min-height: 80px;
+        max-height: 80px;
+    }
+    
+    .top-header-logo {
+        height: 60px;
     }
     
     .top-header-logo img {
         width: 120px;
+        height: 50px;
+        max-height: 50px;
     }
     
+    /* Esconder botão Sair no mobile/tablet */
     .top-header-logout {
-        padding: 8px 12px;
-        font-size: 13px;
+        display: none !important;
+    }
+    
+    /* Mostrar hamburguer no mobile/tablet */
+    .top-header-hamburger {
+        display: flex !important;
+    }
+    
+    /* Sidebar mobile */
+    .sidebar {
+        transform: translateX(-100%);
+        box-shadow: 4px 0 25px rgba(0,0,0,0.3);
+        visibility: hidden;
+    }
+    
+    body.sidebar-open .sidebar {
+        transform: translateX(0);
+        visibility: visible;
+    }
+    
+    body.sidebar-open .sidebar-overlay {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* Tablet: 768px a 991px */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .top-header {
+        height: 90px;
+        min-height: 90px;
+        max-height: 90px;
+    }
+    
+    .top-header-logo img {
+        width: 140px;
+        height: 60px;
+        max-height: 60px;
+    }
+}
+
+/* Mobile pequeno: até 480px */
+@media (max-width: 480px) {
+    .top-header {
+        padding: 0 10px;
+        height: 70px;
+        min-height: 70px;
+        max-height: 70px;
+    }
+    
+    .top-header-logo {
+        height: 50px;
+    }
+    
+    .top-header-logo img {
+        width: 100px;
+        height: 40px;
+        max-height: 40px;
+    }
+    
+    .top-header-hamburger {
+        width: 42px;
+        height: 42px;
+        font-size: 22px;
     }
 }

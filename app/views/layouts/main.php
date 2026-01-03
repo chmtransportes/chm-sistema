@@ -156,6 +156,10 @@ $csrfToken = Session::getCsrfToken();
             <a href="<?= APP_URL ?>logout" class="top-header-logout">
                 <i class="bi bi-box-arrow-right"></i> Sair
             </a>
+            <!-- Hamburguer Mobile/Tablet -->
+            <button class="top-header-hamburger" onclick="toggleSidebar()" aria-label="Menu">
+                <i class="bi bi-list"></i>
+            </button>
         </header>
 
         <!-- Flash Messages -->

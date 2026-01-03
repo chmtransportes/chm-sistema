@@ -1,4 +1,4 @@
-CHM-SISTEMA VERSION: 2.11.0
-Data: 03/01/2026 03:26
+CHM-SISTEMA VERSION: 2.12.0
+Data: 03/01/2026 05:10
 Deployed by: Cascade (claude-sonnet-4-20250514)
-Backup: 03/01/2026 03:26 - Header 120px, logo 160px
+Alteração: Mobile/Tablet - Hamburguer bonito, cabeçalho ajustado, Sair escondido
