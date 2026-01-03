@@ -168,7 +168,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 20px;
+    padding: 18px 25px;
     background: #ffffff;
     border-bottom: 1px solid #e0e0e0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
@@ -180,9 +180,9 @@ body {
 }
 
 .top-header-logo img {
-    height: 50px;
+    height: 38px;
     width: auto;
-    max-width: 160px;
+    max-width: 130px;
     object-fit: contain;
 }
 
@@ -214,12 +214,12 @@ body {
 /* Header Responsivo */
 @media (max-width: 768px) {
     .top-header {
-        padding: 10px 15px;
+        padding: 14px 15px;
     }
     
     .top-header-logo img {
-        height: 40px;
-        max-width: 130px;
+        height: 32px;
+        max-width: 110px;
     }
     
     .top-header-logout {
@@ -230,8 +230,8 @@ body {
 
 @media (max-width: 480px) {
     .top-header-logo img {
-        height: 35px;
-        max-width: 110px;
+        height: 28px;
+        max-width: 95px;
     }
     
     .top-header-logout span {
