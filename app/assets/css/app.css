@@ -809,9 +809,9 @@ body {
 .top-header {
     position: sticky;
     top: 0;
-    height: 80px;
-    min-height: 80px;
-    max-height: 80px;
+    height: 120px;
+    min-height: 120px;
+    max-height: 120px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -825,14 +825,13 @@ body {
 .top-header-logo {
     display: flex;
     align-items: center;
-    height: 60px;
+    height: 100px;
 }
 
 .top-header-logo img {
-    width: auto;
-    height: 50px;
-    max-height: 50px;
-    max-width: 160px;
+    width: 160px;
+    height: auto;
+    max-height: 90px;
     object-fit: contain;
 }
 
