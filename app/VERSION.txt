@@ -1,3 +1,4 @@
-CHM-SISTEMA VERSION: 2.9.0
-Date: 2026-01-03
+CHM-SISTEMA VERSION: 2.9.7
+Date: 2026-01-03 01:49
 Last deployed by: Cascade (claude-sonnet-4-20250514)
+Backup: 2026-01-03 01:49 - Header com variável CSS única
