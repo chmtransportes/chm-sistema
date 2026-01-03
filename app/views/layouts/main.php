@@ -149,12 +149,14 @@ $csrfToken = Session::getCsrfToken();
     <main id="main-content" class="main-content">
         <!-- TOP HEADER -->
         <header class="top-header">
-            <a href="<?= APP_URL ?>dashboard" class="top-header-logo">
-                <img src="<?= ASSETS_URL ?>img/logo.png" alt="CHM Sistema">
-            </a>
-            <a href="<?= APP_URL ?>logout" class="top-header-logout">
-                <i class="bi bi-box-arrow-right"></i> Sair
-            </a>
+            <div class="top-header__container">
+                <a href="<?= APP_URL ?>dashboard" class="top-header__logo">
+                    <img src="<?= ASSETS_URL ?>img/logo.png" alt="CHM Sistema">
+                </a>
+                <a href="<?= APP_URL ?>logout" class="top-header-logout">
+                    <i class="bi bi-box-arrow-right"></i> Sair
+                </a>
+            </div>
         </header>
 
         <!-- Flash Messages -->
