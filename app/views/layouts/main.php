@@ -149,29 +149,22 @@ $csrfToken = Session::getCsrfToken();
 
     <!-- Main Content -->
     <main id="main-content" class="main-content">
-        <!-- Top Header -->
-        <header class="top-header">
-            <!-- Logo -->
-            <a href="<?= APP_URL ?>dashboard" class="top-header-logo">
-                <img src="<?= ASSETS_URL ?>img/logo-chm.png" alt="CHM Transportes">
-            </a>
-
-            <!-- Spacer -->
-            <div class="top-header-spacer"></div>
-
-            <!-- Desktop: Logout -->
-            <div class="top-header-logout desktop-only">
-                <a href="<?= APP_URL ?>logout" class="btn btn-outline-danger btn-sm">
-                    <i class="bi bi-box-arrow-right me-1"></i>Sair
-                </a>
+        <!-- CABEÇALHO NOVO - Fundo Branco -->
+        <header class="site-header">
+            <div class="header-container">
+                <!-- Logo (Esquerda) -->
+                <div class="header-left">
+                    <a href="<?= APP_URL ?>dashboard">
+                        <img src="<?= ASSETS_URL ?>img/logo-chm.png" alt="CHM Sistema" class="header-logo">
+                    </a>
+                </div>
+                <!-- Botão Sair (Direita) -->
+                <div class="header-right">
+                    <a href="<?= APP_URL ?>logout" class="btn-sair">
+                        <i class="bi bi-box-arrow-right"></i> Sair
+                    </a>
+                </div>
             </div>
-
-            <!-- Mobile: Hamburger -->
-            <button class="top-header-hamburger mobile-only" onclick="toggleSidebar()" aria-label="Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </header>
 
         <!-- Flash Messages -->

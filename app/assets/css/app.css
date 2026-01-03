@@ -173,119 +173,82 @@ body {
 }
 
 /* ============================================
-   TOP HEADER - LIMPO E SEM DUPLICAÇÃO
+   CABEÇALHO NOVO - LIMPO
    @author ch-mestriner (https://ch-mestriner.com.br)
    @date 02/01/2026
    ============================================ */
 
-/* Header Base */
-.top-header {
+.site-header {
+    background: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
-    height: 70px;
-    background: #fff;
-    border-bottom: 1px solid #e9ecef;
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    padding: 15px 25px;
+    max-width: 100%;
 }
 
-/* Logo */
-.top-header-logo {
-    display: flex;
-    align-items: center;
+.header-left {
     flex-shrink: 0;
 }
 
-.top-header-logo img {
-    width: 180px;
-    height: auto;
+.header-right {
+    flex-shrink: 0;
+}
+
+.btn-sair {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.btn-sair:hover {
+    background: #c82333;
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-sair i {
+    font-size: 16px;
+}
+
+.header-logo {
+    height: 60px;
+    width: auto;
+    max-width: 180px;
     object-fit: contain;
 }
 
-/* Spacer */
-.top-header-spacer {
-    flex: 1;
-}
-
-/* Desktop Logout */
-.top-header-logout {
-    display: flex;
-    align-items: center;
-}
-
-/* Mobile Hamburger */
-.top-header-hamburger {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    padding: 8px;
-    background: transparent;
-    border: 2px solid var(--primary);
-    border-radius: 6px;
-    cursor: pointer;
-    gap: 4px;
-    flex-shrink: 0;
-}
-
-.top-header-hamburger span {
-    display: block;
-    width: 18px;
-    height: 2px;
-    background: var(--primary);
-    border-radius: 2px;
-    transition: all 0.2s ease;
-}
-
-.top-header-hamburger:active {
-    background: var(--primary);
-}
-
-.top-header-hamburger:active span {
-    background: #fff;
-}
-
-/* Main content - compensar header fixo */
-.main-content {
-    padding-top: 78px;
-}
-
 /* Mobile */
-@media (max-width: 991.98px) {
-    .top-header {
-        padding: 0 16px;
-        height: 60px;
+@media (max-width: 768px) {
+    .header-container {
+        padding: 10px 15px;
     }
     
-    .top-header-logo img {
-        width: 120px;
+    .header-logo {
+        height: 45px;
+        max-width: 140px;
     }
     
-    .main-content {
-        padding-top: 68px;
-    }
-}
-
-/* Desktop */
-@media (min-width: 992px) {
-    .top-header {
-        height: 60px;
-    }
-    
-    .top-header-logo img {
-        width: 200px;
-    }
-    
-    .main-content {
-        padding-top: 68px;
+    .btn-sair {
+        padding: 6px 12px;
+        font-size: 13px;
     }
 }
 
@@ -851,97 +814,9 @@ body {
    @date 29/12/2025
    ============================================ */
 
-/* === TOPBAR MOBILE (default) === */
-.topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 16px;
-    height: 128px;
-    background: #fff;
-    border-bottom: 1px solid #ddd;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    box-shadow: none;
-}
-
-/* Logo Mobile - Esquerda */
-.mobile-logo {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-}
-
-.mobile-logo img {
-    height: 92px;
-    width: auto;
-    max-width: 211px;
-    object-fit: contain;
-}
-
-/* Spacer */
-.topbar-spacer {
-    flex: 1;
-}
-
-/* Hamburger Mobile - Direita */
-.mobile-hamburger {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 44px;
-    height: 44px;
-    padding: 10px;
-    background: transparent;
-    border: 2px solid var(--primary);
-    border-radius: 8px;
-    cursor: pointer;
-    gap: 4px;
-    flex-shrink: 0;
-}
-
-.mobile-hamburger span {
-    display: block;
-    width: 20px;
-    height: 2px;
-    background: var(--primary);
-    border-radius: 2px;
-    transition: all 0.2s ease;
-}
-
-.mobile-hamburger:active {
-    background: var(--primary);
-}
-
-.mobile-hamburger:active span {
-    background: #fff;
-}
-
-/* Breadcrumb nav */
-.breadcrumb-nav {
-    flex: 1;
-    margin-left: 20px;
-}
-
-/* Topbar user */
-.topbar-user {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.topbar-user > span {
-    font-size: 14px;
-    color: #6c757d;
-}
-
-/* Main content - compensar header fixo */
+/* Main content */
 .main-content {
-    padding-top: 136px;
+    padding-top: 0;
 }
 
 /* Page content mobile - BRANCO LIMPO */
@@ -984,20 +859,6 @@ body {
 
 /* === DESKTOP (992px+) === */
 @media (min-width: 992px) {
-    .mobile-hamburger {
-        display: none !important;
-    }
-    
-    .mobile-logo img {
-        height: 36px;
-        max-width: 80px;
-    }
-    
-    .topbar-spacer {
-        display: none;
-    }
-    
-    /* Sidebar compacto no desktop - sem logo */
     .sidebar-header {
         display: none !important;
     }
@@ -1015,20 +876,11 @@ body {
     
     .main-content {
         margin-left: 220px;
+        padding-top: 0;
     }
     
     .desktop-only {
         display: flex !important;
-    }
-    
-    .topbar {
-        position: sticky;
-        padding: 0 20px;
-        height: var(--topbar-height);
-    }
-    
-    .main-content {
-        padding-top: 0;
     }
 }
 
