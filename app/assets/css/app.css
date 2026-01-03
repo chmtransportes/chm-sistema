@@ -800,19 +800,14 @@ body {
    ============================================ */
 
 .top-header {
-    position: fixed;
-    top: 0;
-    left: var(--sidebar-width);
-    right: 0;
-    height: 130px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 130px;
     padding: 0 30px;
     background: #ffffff;
     border-bottom: 1px solid #e0e0e0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-    z-index: 900;
 }
 
 .top-header-logo {
@@ -852,26 +847,15 @@ body {
     font-size: 16px;
 }
 
-/* Main Content - Compensação do Header */
-.main-content {
-    padding-top: 130px;
-}
-
-/* Mobile: Header full width */
+/* Mobile: Header ajustes */
 @media (max-width: 991.98px) {
     .top-header {
-        left: 0;
         height: 100px;
         padding: 0 20px;
     }
     
     .top-header-logo img {
         width: 130px;
-    }
-    
-    .main-content {
-        padding-top: 100px;
-        margin-left: 0;
     }
 }
 
@@ -888,9 +872,5 @@ body {
     .top-header-logout {
         padding: 10px 14px;
         font-size: 13px;
-    }
-    
-    .main-content {
-        padding-top: 80px;
     }
 }

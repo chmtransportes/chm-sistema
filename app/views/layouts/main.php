@@ -145,18 +145,18 @@ $csrfToken = Session::getCsrfToken();
         </ul>
     </nav>
 
-    <!-- TOP HEADER - Fixo no Topo -->
-    <header class="top-header">
-        <a href="<?= APP_URL ?>dashboard" class="top-header-logo">
-            <img src="<?= ASSETS_URL ?>img/logo.png" alt="CHM Sistema">
-        </a>
-        <a href="<?= APP_URL ?>logout" class="top-header-logout">
-            <i class="bi bi-box-arrow-right"></i> Sair
-        </a>
-    </header>
-
     <!-- Main Content -->
     <main id="main-content" class="main-content">
+        <!-- TOP HEADER -->
+        <header class="top-header">
+            <a href="<?= APP_URL ?>dashboard" class="top-header-logo">
+                <img src="<?= ASSETS_URL ?>img/logo.png" alt="CHM Sistema">
+            </a>
+            <a href="<?= APP_URL ?>logout" class="top-header-logout">
+                <i class="bi bi-box-arrow-right"></i> Sair
+            </a>
+        </header>
+
         <!-- Flash Messages -->
         <?php if ($flash = Session::getFlash('success')): ?>
         <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
