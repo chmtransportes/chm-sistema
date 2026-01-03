@@ -158,6 +158,10 @@ body {
     flex-direction: column;
 }
 
+#main-content {
+    margin-top: 130px;
+}
+
 /* ============================================
    TOP HEADER - Único e Global
    @author ch-mestriner (https://ch-mestriner.com.br)
