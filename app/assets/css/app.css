@@ -810,11 +810,11 @@ body {
     justify-content: space-between;
     width: 100%;
     height: var(--header-height);
-    padding: 10px 30px;
+    padding: 15px 40px;
     margin: 0;
-    background: transparent;
-    border-bottom: none;
-    box-shadow: none;
+    background: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
     flex-shrink: 0;
 }
 
