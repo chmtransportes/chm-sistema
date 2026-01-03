@@ -17,12 +17,10 @@
     --light: #f8f9fa;
     --dark: #212529;
     --sidebar-width: 260px;
-    --header-height: 120px;
+    --header-height: 130px;
     --border-radius: 8px;
     --shadow: 0 2px 10px rgba(0,0,0,0.1);
     --transition: all 0.3s ease;
-    --content-max: 100%;
-    --content-pad: 20px;
 }
 
 * {
@@ -166,10 +164,8 @@ body {
 }
 
 .page-content {
-    width: 100%;
-    max-width: var(--content-max);
-    margin: 0 auto;
-    padding: var(--content-pad);
+    padding: 20px;
+    padding-top: calc(var(--header-height) + 20px);
     flex: 1;
     overflow: auto;
 }
@@ -810,42 +806,33 @@ body {
    ============================================ */
 
 .top-header {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    background: transparent;
-    box-shadow: none;
-    border: 0;
-    flex-shrink: 0;
-}
-
-.top-header__container {
+    position: fixed;
+    top: 0;
+    left: var(--sidebar-width);
+    right: 0;
     height: var(--header-height);
-    width: 100%;
-    max-width: var(--content-max);
-    margin: 0 auto;
-    padding: 0 var(--content-pad);
-    background: #ffffff;
+    width: calc(100% - var(--sidebar-width));
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    box-sizing: border-box;
+    padding: 0 30px;
+    background: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 2px 6px rgba(0,0,0,.06);
+    z-index: 1000;
 }
 
-.top-header__logo {
+.top-header-logo {
     display: flex;
     align-items: center;
     height: 100%;
 }
 
-.top-header__logo img {
+.top-header-logo img {
     width: 160px;
     height: auto;
-    max-height: calc(var(--header-height) - 30px);
+    max-height: 100%;
     object-fit: contain;
-    display: block;
 }
 
 .top-header-logout {
@@ -878,26 +865,37 @@ body {
 
 /* Mobile: Header ajustes */
 @media (max-width: 991.98px) {
-    .top-header__container {
+    .top-header {
+        left: 0;
+        width: 100%;
         padding: 0 15px;
     }
     
-    .top-header__logo img {
+    .top-header-logo img {
         width: 140px;
+    }
+    
+    .page-content {
+        padding-top: calc(var(--header-height) + 15px);
     }
 }
 
 @media (max-width: 480px) {
-    .top-header__container {
+    .top-header {
         padding: 0 10px;
+        height: 100px;
     }
     
-    .top-header__logo img {
+    .top-header-logo img {
         width: 120px;
     }
     
     .top-header-logout {
         padding: 8px 12px;
         font-size: 13px;
+    }
+    
+    .page-content {
+        padding-top: 110px;
     }
 }
