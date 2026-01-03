@@ -829,9 +829,10 @@ body {
 }
 
 .top-header-logo img {
-    width: 160px;
-    height: auto;
-    max-height: 90px;
+    width: 160px !important;
+    height: 80px !important;
+    max-width: 160px !important;
+    max-height: 80px !important;
     object-fit: contain;
 }
 
