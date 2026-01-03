@@ -153,15 +153,17 @@ body {
 .main-content {
     margin-left: var(--sidebar-width);
     min-height: 100vh;
+    height: auto;
+    overflow: visible;
     transition: var(--transition);
     display: flex;
     flex-direction: column;
 }
 
-
 .page-content {
     padding: 20px;
     flex: 1;
+    overflow: auto;
 }
 
 /* Cards */
@@ -803,15 +805,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 130px;
     height: 130px;
-    max-height: 130px;
     padding: 20px 30px;
     background: #ffffff;
     border-bottom: 1px solid #e0e0e0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
     flex-shrink: 0;
-    overflow: hidden;
 }
 
 .top-header-logo {
